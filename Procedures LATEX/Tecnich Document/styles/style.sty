@@ -1,0 +1,225 @@
+\ProvidesPackage{manual}
+
+
+\usepackage[acronym, toc]{glossaries}
+
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\usepackage{setspace}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{listofitems}
+\usepackage{outlines}
+\usepackage{filecontents}
+% Import files
+\usepackage{import} 
+% Color de tablas
+\usepackage[table]{xcolor}
+\usepackage{makecell}
+% Usar puntos en indice|
+\usepackage{tocloft}
+% UML 
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[simplified]{pgf-umlcd}
+% Tablas
+\usepackage{tabularx} % in the preamble
+\usepackage{longtable}
+% Mapas mentales %
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage{minted}
+\usepackage{scrextend}
+\usepackage{pdfpages}
+% Mind maps and 
+\usepackage{tikz}
+\usetikzlibrary{mindmap,trees}
+% Viñetas y enumeraciones %
+\usepackage{enumerate}
+\usepackage{enumitem}   
+%Indica qué codificación se está usando ISO-8859-1(latin1)  o utf8  
+\usepackage[utf8]{inputenc} % Comandos extras para matemáticas (cajas para ecuaciones,etc)
+\usepackage{amsmath} 
+\usepackage{amssymb} 
+% Simbolos matematicos (por lo tanto)
+\usepackage{graphicx} 
+% Incluir imágenes en LaTeX
+\usepackage{color} 
+% Para colorear texto
+%%%%%\usepackage{subfigure} 
+% Subfigures
+\usepackage{float} 
+%Podemos usar el especificador [H] en las figuras para que se queden donde queramos
+\usepackage{capt-of} 
+% Permite usar etiquetas fuera de elementos flotantes (etiquetas de figuras)
+\usepackage{sidecap} 
+% Para poner el texto de las imágenes al lado
+\sidecaptionvpos{figure}{c} 
+% Para que el texto se alinie al centro vertical
+\usepackage{caption} 
+% To quit figures enumeration
+\usepackage{commath} 
+% To cancel expresions (\cancelto{0}{x})
+\usepackage{cancel} 
+% Para personalizar el ancho de  los márgenes
+\usepackage{anysize}          
+\usepackage{appendix}
+% Add header and footer
+\usepackage{fancyhdr} 
+% Background image for cover page
+\usepackage{graphicx}
+\usepackage{watermark}
+% codigo color
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{listingsutf8} 
+\usepackage{fancyvrb}
+
+
+\usepackage{tikz}
+\usepackage{PTSansNarrow}
+\usepackage[T1]{fontenc}
+
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\newcommand*{\mybox}[1]{\framebox{#1}}
+
+\setlength\extrarowheight{3pt}
+
+\usetikzlibrary{matrix}
+
+\lstset{
+    extendedchars=true,
+    texcl=true,
+    inputencoding=latin1,
+    literate=%
+    {á}{{\'a}}1
+    {é}{{\'e}}1
+    {è}{{\`e}}1
+    {í}{{\'i}}1
+    {ó}{{\'o}}1
+    {ú}{{\'u}}1
+}
+
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},   
+    commentstyle=\color{green},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{purple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=C
+}
+
+\lstdefinestyle{HTMLStyle}{
+    backgroundcolor=\color{backgroundColour},   
+    commentstyle=\color{red},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{purple},
+    basicstyle=\ttfamily,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=bash,
+    language=HTML5,
+    alsolanguage=JavaScript,
+    alsodigit={.:;},
+    extendedchars=true
+}
+
+
+\lstdefinestyle{BashStyle}{
+    backgroundcolor=\color{backgroundColour},   
+    commentstyle=\color{red},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{purple},
+    basicstyle=\ttfamily,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=bash,
+    showstringspaces=false
+}
+
+\lstdefinelanguage{JavaScript}{
+  morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morestring=[b]",
+  morestring=[b]'
+}
+
+\lstdefinelanguage{HTML5}{
+        language=html,
+        sensitive=true, 
+        alsoletter={<>=-},
+        otherkeywords={
+        % HTML tags
+        <html>, <head>, <title>, </title>, <meta, />, </head>, <body>,
+        <canvas, \/canvas>, <script>, </script>, </body>, </html>, <!, html>, <style>, </style>, ><
+        },  
+        ndkeywords={
+        % General
+        =,
+        % HTML attributes
+        charset=, id=, width=, height=,
+        % CSS properties
+        border:, transform:, -moz-transform:, transition-duration:, transition-property:, transition-timing-function:
+        },  
+        morecomment=[s]{<!--}{-->},
+        tag=[s]
+}
+
+
+%%% Page configuration
+%\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\renewcommand{\headrulewidth}{0 pt}
+\renewcommand{\footrulewidth}{0 pt}
+\fancyhead{} % Clear all header field
+\fancyfoot{} % Clear all footer fields
+\fancyhead[L]{}
+\fancyhead[R]{}  % Right
+\fancyfoot[L]{}  % Left
+\fancyfoot[C]{\thepage}  % Center
+\fancyfoot[R]{}  % Pie derecha
+
+
+
+
+

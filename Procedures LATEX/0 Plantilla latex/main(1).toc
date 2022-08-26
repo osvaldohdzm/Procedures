@@ -1,0 +1,30 @@
+\contentsline {section}{\numberline {1}Herramientas}{5}{section.1}%
+\contentsline {section}{\numberline {2}WebSocket Unencrypted Communications Verification}{5}{section.2}%
+\contentsline {section}{\numberline {3}WebSocket Cross-site hijacking Test}{5}{section.3}%
+\contentsline {section}{\numberline {4}WebSocket Denial of Service Test}{6}{section.4}%
+\contentsline {section}{\numberline {5}TLS/SSL Verfication}{7}{section.5}%
+\contentsline {section}{\numberline {6}HTTP Security Headers Verification}{7}{section.6}%
+\contentsline {section}{\numberline {7}HTTP Host Header Injection}{7}{section.7}%
+\contentsline {section}{\numberline {8}HTTP Options Method Verification}{7}{section.8}%
+\contentsline {section}{\numberline {9}HTTP Trace Method Check}{8}{section.9}%
+\contentsline {section}{\numberline {10}HTTP Cookies Verification}{8}{section.10}%
+\contentsline {section}{\numberline {11}Subresource Integrity (SRI) Implementation Verification}{8}{section.11}%
+\contentsline {section}{\numberline {12}Login brute force attack test}{8}{section.12}%
+\contentsline {section}{\numberline {13}Web application exploration}{9}{section.13}%
+\contentsline {section}{\numberline {14}Ports identification}{9}{section.14}%
+\contentsline {section}{\numberline {15}Hosted and related applications identification}{9}{section.15}%
+\contentsline {section}{\numberline {16}User roles identification}{9}{section.16}%
+\contentsline {section}{\numberline {17}Files and folders discover}{9}{section.17}%
+\contentsline {section}{\numberline {18}Web application technologies recognition}{10}{section.18}%
+\contentsline {section}{\numberline {19}Search for known vulnerabilities of recognized technologies}{10}{section.19}%
+\contentsline {section}{\numberline {20}Extraction of metadata from downloadable files}{10}{section.20}%
+\contentsline {section}{\numberline {21}Extraction of embedded files}{10}{section.21}%
+\contentsline {section}{\numberline {22}Data extraction from Javascript Source Code}{11}{section.22}%
+\contentsline {section}{\numberline {23}Code injection validation}{11}{section.23}%
+\contentsline {section}{\numberline {24}Cross Site Scripting Validation}{12}{section.24}%
+\contentsline {section}{\numberline {25}File upload feature check: Webshell upload test}{12}{section.25}%
+\contentsline {section}{Reference List}{14}{Item.11}%
+\contentsline {section}{\numberline {A}Appendix Section}{15}{appendix.a.A}%
+\contentsline {section}{\numberline {B}Appendix Section}{15}{appendix.a.B}%
+\contentsline {section}{\numberline {C}Appendix Section}{15}{appendix.a.C}%
+\contentsfinish 

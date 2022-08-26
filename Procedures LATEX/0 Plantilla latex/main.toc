@@ -1,0 +1,54 @@
+\contentsline {section}{\numberline {1}Section Title}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Subsection Title}{4}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Subsubsection Title}{4}{subsubsection.1.1.1}%
+\contentsline {paragraph}{Paragraph Title}{5}{paragraph*.1}%
+\contentsline {section}{\numberline {2}Short version of long section title}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Short version of long subsection title}{5}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}In mi mauris, finibus non faucibus non, imperdiet nec leo. In erat arcu, tincidunt nec aliquam et, volutpat eget}{5}{subsubsection.2.1.1}%
+\contentsline {section}{\numberline {3}Font Examples}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Font Sizes}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Font Families}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Font Weights}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Condensed Fonts}{6}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Quotations}{6}{section.4}%
+\contentsline {section}{\numberline {5}Table Examples}{7}{section.5}%
+\contentsline {section}{\numberline {6}Figure Examples}{7}{section.6}%
+\contentsline {section}{\numberline {7}List Examples}{8}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Bullet Point List}{8}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Numbered List}{8}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Description List}{9}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Referencing Citations}{10}{section.8}%
+\contentsline {section}{\numberline {9}Link Examples}{10}{section.9}%
+\contentsline {section}{\numberline {10}Equation}{10}{section.10}%
+\contentsline {section}{\numberline {11}International Support}{10}{section.11}%
+\contentsline {section}{\numberline {12}Displaying Code}{10}{section.12}%
+\contentsline {section}{\numberline {13}Herramientas}{11}{section.13}%
+\contentsline {section}{\numberline {14}WebSocket Unencrypted Communications Verification}{12}{section.14}%
+\contentsline {section}{\numberline {15}Cross-site WebSocket hijacking Test}{12}{section.15}%
+\contentsline {section}{\numberline {16}WebSocket Denial of Service Test}{13}{section.16}%
+\contentsline {section}{\numberline {17}TLS/SSL Verfication}{13}{section.17}%
+\contentsline {section}{\numberline {18}HTTP Security Headers Verification}{13}{section.18}%
+\contentsline {section}{\numberline {19}HTTP Host Header Injection}{14}{section.19}%
+\contentsline {section}{\numberline {20}HTTP Options Method Verification}{14}{section.20}%
+\contentsline {section}{\numberline {21}HTTP Trace Method Check}{14}{section.21}%
+\contentsline {section}{\numberline {22}HTTP Cookies Verification}{14}{section.22}%
+\contentsline {section}{\numberline {23}Subresource Integrity (SRI) Implementation Verification}{15}{section.23}%
+\contentsline {section}{\numberline {24}Login brute force attack test}{15}{section.24}%
+\contentsline {section}{\numberline {25}Web application exploration}{15}{section.25}%
+\contentsline {section}{\numberline {26}Ports identification}{15}{section.26}%
+\contentsline {section}{\numberline {27}Hosted and related applications identification}{16}{section.27}%
+\contentsline {section}{\numberline {28}User roles identification}{16}{section.28}%
+\contentsline {section}{\numberline {29}Files and folders discover}{16}{section.29}%
+\contentsline {section}{\numberline {30}Web application technologies recognition}{16}{section.30}%
+\contentsline {section}{\numberline {31}Search for known vulnerabilities of recognized technologies}{16}{section.31}%
+\contentsline {section}{\numberline {32}Extraction of metadata from downloadable files}{16}{section.32}%
+\contentsline {section}{\numberline {33}Extraction of embedded files}{17}{section.33}%
+\contentsline {section}{\numberline {34}Data extraction from Javascript Source Code}{17}{section.34}%
+\contentsline {section}{\numberline {35}Code injection validation}{18}{section.35}%
+\contentsline {section}{\numberline {36}Cross Site Scripting Validation}{19}{section.36}%
+\contentsline {section}{\numberline {37}File upload feature check: Webshell upload test}{19}{section.37}%
+\contentsline {section}{Reference List}{21}{Item.22}%
+\contentsline {section}{\numberline {A}Appendix Section}{22}{appendix.a.A}%
+\contentsline {section}{\numberline {B}Appendix Section}{22}{appendix.a.B}%
+\contentsline {section}{\numberline {C}Appendix Section}{22}{appendix.a.C}%
+\contentsfinish 
