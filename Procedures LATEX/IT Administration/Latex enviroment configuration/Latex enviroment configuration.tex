@@ -1,0 +1,228 @@
+
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[letterpaper,12pt]{extarticle}
+
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[hyphens]{url}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template'
+\usepackage{tcolorbox}
+\tcbuselibrary{minted,breakable,xparse,skins}
+
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+
+\newcommand{\changeurlcolor}[1]{\hypersetup{blue=#1}}   
+
+
+
+\usepackage{xcolor}% http://ctan.org/pkg/xcolor
+
+\usepackage{enumitem,amssymb}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+\hspace{-2.5pt}}
+\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
+
+\usepackage{float}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkClass\ (\hmwkShortTitle\ \hmwkClassTime)} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Página\ \thepage\ de\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+
+
+\definecolor{bg}{gray}{0.95}
+\DeclareTCBListing{mintedbox}{O{}m!O{}}{%
+  breakable=true,
+  listing engine=minted,
+  listing only,
+  minted language=#2,
+  minted style=default,
+  minted options={%
+    linenos,
+    gobble=0,
+    breaklines=true,
+    breakafter=,,
+    fontsize=\small,
+    numbersep=8pt,
+    #1},
+  boxsep=0pt,
+  left skip=0pt,
+  right skip=0pt,
+  left=25pt,
+  right=0pt,
+  top=3pt,
+  bottom=3pt,
+  arc=5pt,
+  leftrule=0pt,
+  rightrule=0pt,
+  bottomrule=2pt,
+  toprule=2pt,
+  colback=bg,
+  colframe=orange!70,
+  enhanced,
+  overlay={%
+    \begin{tcbclipinterior}
+    \fill[orange!20!white] (frame.south west) rectangle ([xshift=20pt]frame.north west);
+    \end{tcbclipinterior}},
+  #3}
+%----------------------------------------------------------------------------------------
+%	href
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continue sur la page suivante\ldots}\nobreak
+\nobreak\extramarks{#1 (suite)}{#1 t\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (suite)}{#1 continue sur la page suivante\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Análisis de vulnerabilidades de aplicaciones web} % Assignment title
+\newcommand{\hmwkDueDate}{29/07/2021} % Due date
+\newcommand{\hmwkClass}{Procedimiento} % Unité
+\newcommand{\hmwkClassTime}{} % Vide
+\newcommand{\hmwkClassInstructor}{Nombre de la aplicación} % Objet du rapport
+\newcommand{\hmwkShortTitle}{Análisis de vulnerabilidades de aplicaciones web} % Objet du rapport (version courte)
+\newcommand{\hmwkAuthorName}{Osvaldo Hernández Morales} % Vore nom
+\newcommand{\hmwkCommanditaire}{.} % Nom de la personne requerante
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\centering{\includegraphics[width=.3\textwidth]{GN_logo.png}}\\
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{\hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{2in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+
+
+\section{INTRODUCCIÓN}
+
+pdflatex.exe -synctex=1 -interaction=nonstopmode %.tex --shell-escape 
+
+latex-workshop.latex.tools
+
+https://github.com/James-Yu/LaTeX-Workshop/wiki/Install
+
+\section{Requirements}
+\begin{itemize}
+  \item LaTeX distribution in system PATH. For example, TeX Live. We strongly recommend TeX Live.
+  \item We don't recommend MiKTeX because MiKTeX does not ship with Perl. If you choose MiKTeX, you have to install Perl by yourself, which latexmk requires. Without Perl, latexmk fails with errors.
+  \item latexmk is required for the default recipe for building LaTeX projects to work. Alternatively, you can set up your own LaTeX recipe.
+  \item Optional: Install ChkTeX to lint LaTeX projects.
+  \item Optional: Install latexindent.pl for formatting support if it is not provided by your LaTeX distribution. You also have to install a few standard Perl modules. See the official document. Latex.
+\end{itemize}
+
+\section{Installation}
+
+\begin{enumerate}
+  \item You need TexLive: go to https://www.tug.org/texlive/acquire-netinstall.html and click on the .exe download for Windows and donwload.
+  \item Make sure the installation has set your environment variables correctly (you can have a slightly different path then mine).
+  \item Reboot you system to force all environment variables to be reloaded.
+  \item Open VSCode est install both “LaTeX Workshop” and “LaTex Utilities”
+  \item Create a folder and create a text file named “yourLaTeXArticle.tex”
+\end{enumerate}
+
+choco install miktex -y
+choco install strawberryperl -y
+
+pdflatex.exe -synctex=1 -interaction=nonstopmode main.tex --shell-escape 
+pdflatex.exe -synctex=1 -interaction=nonstopmode %.tex --shell-escape 
+
+pdflatex -synctex=1 -interaction=nonstopmode --shell-escape '.\Latex enviroment configuration.tex'; del *.aux, *.log, *.out, *.gz; Remove-Item _*
+\end{document}
+
+

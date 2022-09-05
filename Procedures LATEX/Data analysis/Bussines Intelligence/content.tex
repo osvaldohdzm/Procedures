@@ -1,0 +1,367 @@
+
+%----------------------------------------------------------------------------------------
+%	SECTIONS
+%----------------------------------------------------------------------------------------
+
+
+\section{Introducción}
+
+SQL express
+Sql Mangement studio: PAra poder crear las conulstas desde ahi
+
+
+
+hostnanme
+sqlcmd -S DESKTOP-08LNEUA -E
+\section{Tabla calendairo}
+
+
+\begin{lstlisting}[numbers=none]
+% of Sales = DIVIDE([Asset AUM],CALCULATE([Asset AUM],ALL('Dimension')))
+\end{lstlisting}
+ 
+
+
+\begin{lstlisting}[numbers=none]
+change = var _yearlast=CALCULATE(SUM([value]),FILTER(ALLEXCEPT('Table','Table'[Product]),YEAR([Date])=YEAR(MAX([Date]))-1))
+var _year=CALCULATE(SUM([value]),FILTER(ALLEXCEPT('Table','Table'[Product]),YEAR([Date])=YEAR(MAX([Date]))))
+var _qualast=IF(QUARTER(MAX([Date]))=1,CALCULATE(SUM([value]),FILTER(ALLEXCEPT('Table','Table'[Product]),YEAR([Date])=YEAR(MAX([Date]))-1&&QUARTER([Date])=4)),CALCULATE(SUM([value]),FILTER(ALLEXCEPT('Table','Table'[Product]),YEAR([Date])=YEAR(MAX([Date]))&&QUARTER([Date])=QUARTER(MAX([Date]))-1)))
+var _quar=CALCULATE(SUM([value]),FILTER(ALLEXCEPT('Table','Table'[Product]),YEAR([Date])=YEAR(MAX([Date]))&&QUARTER([Date])=QUARTER(MAX([Date]))))
+return 
+IF(ISINSCOPE('Table'[Date].[Year])&&NOT(ISINSCOPE('Table'[Date].[Quarter])),DIVIDE(_year-_yearlast,_yearlast),IF(ISINSCOPE('Table'[Date].[Quarter]),DIVIDE(_quar-_qualast,_qualast)))
+\end{lstlisting}
+
+
+
+SELECT name AS [Login Name], type_desc AS [Account Type]
+FROM sys.server_principals 
+WHERE TYPE IN ('U', 'S', 'G')
+and name not like '%##%'
+ORDER BY name, type_desc
+
+GO
+
+sqlcmd -S DESKTOP-08LNEUA -U osvaldohm
+
+
+
+
+
+let fnDateTable = (StartDate as date, EndDate as date, FYStartMonth as number) as table =>
+  let
+    DayCount = Duration.Days(Duration.From(EndDate - StartDate)),
+    Source = List.Dates(StartDate,DayCount,#duration(1,0,0,0)),
+    TableFromList = Table.FromList(Source, Splitter.SplitByNothing()),   
+    ChangedType = Table.TransformColumnTypes(TableFromList,{{"Column1", type date}}),
+    RenamedColumns = Table.RenameColumns(ChangedType,{{"Column1", "Date"}}),
+    InsertYear = Table.AddColumn(RenamedColumns, "Year", each Date.Year([Date]),type text),
+    InsertYearNumber = Table.AddColumn(RenamedColumns, "YearNumber", each Date.Year([Date])),
+    InsertQuarter = Table.AddColumn(InsertYear, "QuarterOfYear", each Date.QuarterOfYear([Date])),
+    InsertMonth = Table.AddColumn(InsertQuarter, "MonthOfYear", each Date.Month([Date]), type text),
+    InsertDay = Table.AddColumn(InsertMonth, "DayOfMonth", each Date.Day([Date])),
+    InsertDayInt = Table.AddColumn(InsertDay, "DateInt", each [Year] * 10000 + [MonthOfYear] * 100 + [DayOfMonth]),
+    InsertMonthName = Table.AddColumn(InsertDayInt, "MonthName", each Date.ToText([Date], "MMMM"), type text),
+    InsertCalendarMonth = Table.AddColumn(InsertMonthName, "MonthInCalendar", each (try(Text.Range([MonthName],0,3)) otherwise [MonthName]) & " " & Number.ToText([Year])),
+    InsertCalendarQtr = Table.AddColumn(InsertCalendarMonth, "QuarterInCalendar", each "Q" & Number.ToText([QuarterOfYear]) & " " & Number.ToText([Year])),
+    InsertDayWeek = Table.AddColumn(InsertCalendarQtr, "DayInWeek", each Date.DayOfWeek([Date])),
+    InsertDayName = Table.AddColumn(InsertDayWeek, "DayOfWeekName", each Date.ToText([Date], "dddd"), type text),
+    InsertWeekEnding = Table.AddColumn(InsertDayName, "WeekEnding", each Date.EndOfWeek([Date]), type date),
+    InsertWeekNumber= Table.AddColumn(InsertWeekEnding, "Week Number", each Date.WeekOfYear([Date])),
+    InsertMonthnYear = Table.AddColumn(InsertWeekNumber,"MonthnYear", each [Year] * 10000 + [MonthOfYear] * 100),
+    InsertQuarternYear = Table.AddColumn(InsertMonthnYear,"QuarternYear", each [Year] * 10000 + [QuarterOfYear] * 100),
+    ChangedType1 = Table.TransformColumnTypes(InsertQuarternYear,{{"QuarternYear", Int64.Type},{"Week Number", Int64.Type},{"Year", type text},{"MonthnYear", Int64.Type}, {"DateInt", Int64.Type}, {"DayOfMonth", Int64.Type}, {"MonthOfYear", Int64.Type}, {"QuarterOfYear", Int64.Type}, {"MonthInCalendar", type text}, {"QuarterInCalendar", type text}, {"DayInWeek", Int64.Type}}),
+    InsertShortYear = Table.AddColumn(ChangedType1, "ShortYear", each Text.End(Text.From([Year]), 2), type text),
+    AddFY = Table.AddColumn(InsertShortYear, "FY", each "FY"&(if [MonthOfYear]>=FYStartMonth then Text.From(Number.From([ShortYear])+1) else [ShortYear]))
+in
+    AddFY
+in
+    fnDateTable
+
+
+let
+    // Start FYMonth is 11 November
+    Source = #"DATES QUERY"(#date(2014, 1, 1), #date(2025, 01, 01), 11),
+    #"Renamed Columns" = Table.RenameColumns(Source,{{"MonthName", "Month"}, {"MonthInCalendar", "Month & Year"}})
+in
+    #"Renamed Columns"
+
+
+
+
+All databses
+SELECT name FROM master.sys.databases
+GO
+USE MundoBinario
+GO
+
+
+	Run cmd as asmind
+
+	sqlcmd -S DESKTOP-08LNEUA\SQLEXPRESS -E
+
+sentencia  SQL
+GO 
+
+
+
+
+
+Mostrar un plan de ejecución real
+Se aplica a: SQL Server (todas las versiones compatibles)  Azure SQL Managed Instance Database  Azure SQL
+En este tema se describe cómo generar planes de ejecución gráficos reales mediante SQL Server Management Studio. Los planes de ejecución reales se generan después de que se ejecuten las consultas o lotes de Transact-SQL. Por este motivo, un plan de ejecución real contiene información de tiempo de ejecución, como métricas de uso real de recursos o advertencias en tiempo de ejecución (si las hubiera). El plan de ejecución que se genera muestra el plan de ejecución de consultas real que el motor de base de datos de SQL Server usó para ejecutar las consultas.
+
+Para usar esta característica, los usuarios deben tener los permisos adecuados para ejecutar las consultas de Transact-SQL para las que se genera un plan de ejecución gráfico y se les debe conceder el permiso SHOWPLAN para todas las bases de datos a las que hace referencia la consulta..
+
+
+Inclue Actual Execution Plan Button
+Includwe Live Stastus 
+
+
+
+
+
+Hiearchy = 
+var isyearinscope = ISINSCOPE(Date_Master[Date].[Year])
+var isquarterinscope = ISINSCOPE(Date_Master[Date].[Quarter])
+var ismonthinscope = ISINSCOPE(Date_Master[Date].[Month])
+var isdayinscope = ISINSCOPE(Date_Master[Date].[Day])
+return
+IF(
+    isdayinscope,"D",
+    IF(
+        ismonthinscope,"M",
+        IF(
+            isquarterinscope,"Q",
+            IF(
+                isyearinscope,"Y",
+                "Y"
+                )
+            )
+        )
+    )
+
+
+
+    var TotalMonth = CALCULATE(SUM(financials[ Sales]), FILTER(ALLSELECTED('Calendar'),'Calendar'[Date] <= ENDOFMONTH('Calendar'[Date]) && 'Calendar'[Date] >= STARTOFMONTH('Calendar'[Date])))
+
+
+
+\begin{lstlisting}[numbers=none]
+% Percentage = 
+
+var Total = CALCULATE(SUM(financials[ Sales]), ALLSELECTED('Calendar'))
+
+var CurrentLastDate = MAX('Calendar'[Date])
+
+var TotalMonth = CALCULATE(SUM(financials[ Sales]), FILTER(ALLSELECTED('Calendar'), 'Calendar'[Date] >= DATE(YEAR(CurrentLastDate),MONTH(CurrentLastDate),1) && 'Calendar'[Date] <= EOMONTH(CurrentLastDate,0)))
+
+var TotalYear = CALCULATE(SUM(financials[ Sales]), FILTER(ALLSELECTED('Calendar'), 'Calendar'[Date] >= DATE(YEAR(CurrentLastDate),1,1) && 'Calendar'[Date] <=  DATE(YEAR(CurrentLastDate),12,31)))
+
+var TotalQuarter = CALCULATE(SUM(financials[ Sales]), FILTER(ALLSELECTED('Calendar'), 'Calendar'[Date] >= DATE(YEAR(CurrentLastDate),INT(FORMAT(CurrentLastDate,"q"))*3-2,1) && 'Calendar'[Date] <=  DATE(YEAR(CurrentLastDate),INT(FORMAT(CurrentLastDate,"q"))*3,EOMONTH(DATE(YEAR(CurrentLastDate),INT(FORMAT(CurrentLastDate,"q"))*3,1),0))))
+
+
+var Sales = SUM(financials[ Sales])
+
+var Denominator  = SWITCH( true(), ISINSCOPE('Calendar'[Date].[Day]),TotalMonth,ISINSCOPE('Calendar'[Date].[Month]),TotalQuarter,ISINSCOPE('Calendar'[Date].[Quarter]),TotalYear,ISINSCOPE('Calendar'[Date].[Year]),Total)
+
+var Percentage = DIVIDE(Sales, Denominator,1)
+
+return Percentage
+\end{lstlisting}
+
+
+
+CREATE DATABASE PRUEBAT
+
+USE PRUEBAT 
+
+CREATE TABLE Dim_sucursal (
+    SucursalKey integer IDENTITY(1,1) PRIMARY KEY,
+	Nombre varchar(255),
+	Ubicacion varchar(255),
+	Region varchar(255),
+	Canal varchar(255)
+);
+
+CREATE TABLE Dim_articulo (
+    ArticuloKey integer IDENTITY(1,1) PRIMARY KEY,
+	Descripcion varchar(255),
+	Proveedor_Id varchar(255),
+	Fecha_alta date	
+);
+
+CREATE TABLE Dim_tiempo (
+    TiempoKey integer IDENTITY(1,1) PRIMARY KEY,
+	Fecha date,
+	Anio integer,
+	Mes integer,
+	Hora time
+);
+
+
+CREATE TABLE Hecho_transacciones (
+    TransactionID integer IDENTITY(1,1) PRIMARY KEY,
+	SKU varchar(255),
+	Monto_venta money,
+	Promocion decimal,
+	Cantidad integer,
+	Impuesto decimal(4,3),
+	Descuento decimal(4,3),
+	TiempoKey integer FOREIGN KEY REFERENCES Dim_tiempo(TiempoKey),
+	SucursalKey integer FOREIGN KEY REFERENCES Dim_sucursal(SucursalKey),
+	ArticuloKey integer FOREIGN KEY REFERENCES Dim_articulo(ArticuloKey)
+);
+
+INSERT INTO Dim_sucursal (Nombre,Ubicacion,Region,Canal) VALUES ('Sucursal Norte','Medellin','LATAM','A');
+INSERT INTO Dim_sucursal (Nombre,Ubicacion,Region,Canal) VALUES ('Sucursal Sur','México','LATAM','B');
+INSERT INTO Dim_sucursal (Nombre,Ubicacion,Region,Canal) VALUES ('Sucursal Este','Argentina','LATAM','C');
+INSERT INTO Dim_sucursal (Nombre,Ubicacion,Region,Canal) VALUES ('Sucursal Oeste','Perú','LATAM','D');
+INSERT INTO Dim_sucursal (Nombre,Ubicacion,Region,Canal) VALUES ('Sucursal Centro','Guatemala','LATAM','E');
+
+SELECT * FROM  Dim_sucursal
+
+INSERT INTO Dim_articulo (Descripcion,Proveedor_Id,Fecha_alta) VALUES ('Laptop','123','20120618 10:34:09 AM');
+INSERT INTO Dim_articulo (Descripcion,Proveedor_Id,Fecha_alta) VALUES ('PC','123','20120618 11:34:09 AM');
+INSERT INTO Dim_articulo (Descripcion,Proveedor_Id,Fecha_alta) VALUES ('Celular','123','20120618 12:34:09 AM');
+INSERT INTO Dim_articulo (Descripcion,Proveedor_Id,Fecha_alta) VALUES ('Reloj','123','20120618 06:34:09 PM');
+INSERT INTO Dim_articulo (Descripcion,Proveedor_Id,Fecha_alta) VALUES ('Bocina','123','20120618 08:34:09 PM');
+INSERT INTO Dim_articulo (Descripcion,Proveedor_Id,Fecha_alta) VALUES ('Lampara','123','20120618 08:34:09 PM');
+
+SELECT * FROM  Dim_articulo
+
+\begin{lstlisting}[numbers=none]
+Declare @numSucursales int
+Set @numSucursales = ( Select Count(*) From Dim_sucursal )
+
+DECLARE @StartDate AS date;
+DECLARE @EndDate AS date;
+SELECT @StartDate = '01/01/2019', -- Date Format - DD/MM/YYY
+       @EndDate   = '12/31/2022';
+Declare @SalesDate datetime;
+Set @SalesDate =  DATEADD(DAY, RAND(CHECKSUM(NEWID()))*(1+DATEDIFF(DAY, @StartDate, @EndDate)),@StartDate);
+
+INSERT INTO Dim_tiempo (Fecha,Anio,Mes,Hora) VALUES (@SalesDate,year( @SalesDate ),month( @SalesDate ),CONVERT(VARCHAR(8),@SalesDate,108));
+INSERT INTO Hecho_transacciones (ArticuloKey,Monto_venta,Promocion,Cantidad,Impuesto,Descuento,TiempoKey,SucursalKey) VALUES (1,RAND()*(5000-100)+100,3,RAND()*(10-1)+1,0.16,0.2,SCOPE_IDENTITY(),RAND()*(@numSucursales-1)+1);
+\end{lstlisting}
+
+SELECT * FROM  Hecho_transacciones INNER JOIN Dim_tiempo ON Hecho_transacciones.TiempoKey=Dim_tiempo.TiempoKey
+
+# Canal
+SELECT Canal, SUM(Monto_venta) Ventas_Canal FROM Hecho_transacciones LEFT JOIN Dim_sucursal ON Hecho_transacciones.SucursalKey=Dim_sucursal.SucursalKey GROUP BY Dim_sucursal.Canal;
+# Por año
+SELECT SUM(Monto_venta) Ventas_Anio FROM Hecho_transacciones LEFT JOIN Dim_tiempo ON Hecho_transacciones.TiempoKey=Dim_tiempo.TiempoKey GROUP BY Anio;
+# Por mes
+SELECT SUM(Monto_venta) Ventas_Mes,Mes FROM Hecho_transacciones LEFT JOIN Dim_tiempo ON Hecho_transacciones.TiempoKey=Dim_tiempo.TiempoKey GROUP BY Mes;
+# Ultima fechad de venta
+SELECT max_date = max( Fecha ) FROM Hecho_transacciones INNER JOIN Dim_tiempo ON Hecho_transacciones.TiempoKey=Dim_tiempo.TiempoKey;
+
+
+DECLARE  @columns NVARCHAR(MAX) = '';
+SELECT @columns += QUOTENAME(Anio) + ',' FROM Dim_tiempo GROUP BY Anio;
+SET @columns = LEFT(@columns, LEN(@columns) - 1);
+PRINT @columns;
+
+SELECT Canal, SUM(Monto_venta) Ventas_Canal FROM Hecho_transacciones LEFT JOIN Dim_sucursal ON Hecho_transacciones.SucursalKey=Dim_sucursal.SucursalKey INNER JOIN Dim_tiempo ON Hecho_transacciones.TiempoKey=Dim_tiempo.TiempoKey  GROUP BY Dim_sucursal.Canal;
+
+# No sold producto
+select Descripcion from Dim_articulo left join Hecho_transacciones on Dim_articulo.ArticuloKey = Hecho_transacciones.ArticuloKey where Hecho_transacciones.ArticuloKey is null;
+
+# Ranking ventas 
+Select Nombre, RANK () OVER ( PARTITION BY Nombre ORDER BY Monto_venta DESC ) price_rank From Dim_sucursal INNER JOIN Hecho_transacciones ON Dim_sucursal.SucursalKey = Hecho_transacciones.SucursalKey 
+
+
+# Stored proocuder
+CREATE PROCEDURE  Saludar AS PRINT 'Hola, Como estas?';
+EXECUTE Saludar;
+
+create procedure InsertSale
+@Monto_venta money,
+@Promocion decimal,
+@Cantidad integer,
+@Impuesto decimal(4,3),
+@Descuento decimal(4,3),
+@TiempoKey integer,
+@SucursalKey integer,
+@ArticuloKey integer
+as
+Begin
+INSERT INTO Hecho_transacciones (ArticuloKey,Monto_venta,Promocion,Cantidad,Impuesto,Descuento,TiempoKey,SucursalKey) VALUES (@ArticuloKey,@Monto_venta,@Promocion,@Cantidad,@Impuesto,@Descuento,@TiempoKey,@SucursalKey);
+END
+
+Uno esx le modelo realacional de tabklas atrivutos
+
+Modelo entidad-relacion
+
+Rombo es relacion
+
+
+La diferencia básica entre el Modelo E-R y el Modelo Relacional es que el modelo E-R trata específicamente con las entidades y sus relaciones. Por otro lado, el Modelo Relacional se ocupa de las Tablas y de la relación entre los datos de esas tablas.
+
+
+
+
+Could not obtain information about Windows NT group/user
+Change the owner to sa. Here are the steps I took to solve this issue:
+
+Right-Click on the database and select properties
+
+Click on Files under the Select a page
+
+Under the Owner, but just below the Database Name on the right-hand pane, select sa as the owner.
+
+
+ETL Diagram: Visio or Excel :-)
+
+Remember for ETL diagrams you need 3 type:
+
+PDD - Process Dependency Diagram: Shows the sequence of execution and dependency for a bunch of ETL processes.
+DFD - Data Flow Diagram: Show how the data is flowing from one table or file to another. (You can even create data mapping document in excel)
+ETL Design: Shows how the data is being processing by a single ETL process. ex. read, filter, lookup, join, aggregate and load.
+
+
+Stagin database
+Datawarehouse
+
+
+ODS 
+
+OLTP sistema transaccional
+OLAP sistema de analisis
+
+Ralph kimbal
+
+
+Dimension lentametne cambiante
+
+Tipo 1 sobbrescibre como cambiar el numero telefonico
+Tipo 2 van agregando por ejemplo campo current, registro de la  hitria de domicilios
+Tipo 3 no es un nuevo registro, es una acualización porque tiene una columna 
+
+\begin{lstlisting}[numbers=none]
+    % of Sales = DIVIDE([Asset AUM],CALCULATE([Asset AUM],ALL('Dimension')))
+    \end{lstlisting}
+     
+    
+
+
+
+
+
+
+    path item
+path index
+
+
+PATH 
+Seguridad en filas
+
+FLujo de datos con cargas incrementales
+
+Actividadades
+Limpiar 
+Cerrar
+Actualizar registros 
+
+
+Una tabla a la tabla de hechos.
+
