@@ -1,14 +1,28 @@
 
+
 %----------------------------------------------------------------------------------------
 %	SECTIONS
 %----------------------------------------------------------------------------------------
 
 
+sudo apt install python3-pip
+
 \section{Introducción}
 Administración de sistemas windows
 
-￼
 
+Add route to path powrshel
+\begin{lstlisting}[numbers=none]
+$newItem = "C:\Program Files (x86)\AnyDesk"
+$old = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name path).path
+$new  =  "$old;$newItem"
+Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name path -Value $new
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+\end{lstlisting}
+
+\section{Connect to Any desk from command line}
+echo 299792458.Light | anydesk 410112719 --with-password
+Stop-Process -name "AnyDesk"
 
 Configuración de entorno virtual paython
 
@@ -87,7 +101,16 @@ set static ip
 nvim
 
 
+choco install neovim
+
+After install revres path  with:
+refreshenv
+
 Kali Subsystem
+
+
+Go yo recylbeble bin powershell
+C:\$Recycle.Bin\
 
 
 \begin{lstlisting}[numbers=none]
@@ -95,9 +118,17 @@ Kali Subsystem
 \end{lstlisting}
  
 \begin{lstlisting}[numbers=none]
-	sudo touch /etc/resolv.conf && sudo chmod 777 /etc/resolv.conf  && sudo echo "nameserver 172.18.206.36" > /etc/resolv.conf && sudo echo "nameserver 172.18.206.37" >> /etc/resolv.conf && sudo echo "nameserver 8.8.8.8" >> /etc/resolv.conf && sudo echo "nameserver 8.8.4.4" >>  /etc/resolv.conf && sudo chattr +i /etc/resolv.conf
+sudo chattr -R -ia /etc/resolv.conf; sudo rm -rf /etc/resolv.conf && sudo touch /etc/resolv.conf && sudo chmod 777 /etc/resolv.conf  && sudo echo "nameserver 172.18.206.36" > /etc/resolv.conf && sudo echo "nameserver 172.18.206.37" >> /etc/resolv.conf && sudo echo "nameserver 8.8.8.8" >> /etc/resolv.conf && sudo echo "nameserver 8.8.4.4" >>  /etc/resolv.conf && sudo chattr +i /etc/resolv.conf
 \end{lstlisting}
+
+Disable WSL2 network by executing this:
+Disable-NetAdapter -Name "vEthernet (WSL)"
+
+Connect to VPN and then enable WSL2 network by executing this:
+Enable-NetAdapter -Name "vEthernet (WSL)"
  
+New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "vEthernet (WSL)"  -Action Allow
+
 Make chagnes permanten 
 \begin{lstlisting}[numbers=none]
 sudo bash -c 'echo "[network]" > /etc/wsl.conf' && sudo bash -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
@@ -135,7 +166,7 @@ ggVG
 Reemplazar ent odo el texto:
 :%s/MyApp/AppsMenu/g
 
-identiar archivo
+Identar archivo
 gg=G
 
 Copy Line:
@@ -143,6 +174,37 @@ yy
 
 Paste line:
 p
+
+
+:argadd ..\..\IT\ Administration\Windows\ administration\content.tex
+:tab all
+
+
+:tabnew ..\..\IT\ Administration\Windows\ administration\content.tex
+
+
+
+:set nowrap
+:%!python -m json.tool --no-ensure-ascii
+
+this is not necesari owithoy sintax off
+:set re=0
+
+
+paste with 
+*p
+or
+"*p
+
+:syntax off :syntax on
+
+
+type dirty.json | python -m json.tool > pretty.json
+
+
+#### Change tab
+
+gt
 
 
 Set-ItemProperty -Path HKCU:Software\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name EnableTransparency -Value 0 -Force
@@ -157,3 +219,262 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
             "opacity": 20,
             "useAcrylic": true
         })
+
+
+
+nvim
+:set nowrap
+
+
+
+
+
+:set nowrap
+:%!python -m json.tool --no-ensure-ascii
+:set re=0
+
+
+paste with 
+*p
+
+:syntax off :syntax on
+
+
+type dirty.json | python -m json.tool > pretty.json
+
+
+
+
+
+
+ Sonar Queb
+Administration
+Configuration
+Security
+Projects
+System
+Marketplace
+
+
+
+
+\section{EDGE}
+
+
+New-Item -Path HKCU:\Software\Policies\Microsoft\Edge -Name RestoreOnStartupURLs –Force
+$path = 'HKCU:\Software\Policies\Microsoft\Edge\RestoreOnStartupURLs'
+$name = '1'
+$value = 'https://www.google.com.mx'
+Set-Itemproperty -Path $path -Name $name -Value $value
+
+
+
+
+Write-host "Trusting PS Gallery"
+Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
+Write-Host "Installing PolicyFileEditor V3"
+Install-Module -Name PolicyFileEditor -RequiredVersion 3.0.0 -Scope CurrentUser
+$UserDir = "$env:windir\system32\GroupPolicy\User\registry.pol"
+
+
+
+
+MANAGE REGISTRY WINDOWS
+
+# Get details
+$registryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion"
+Get-ItemProperty -Path $registryPath -Name ProgramFilesDir
+
+# Get one value
+Get-ItemPropertyValue 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion' 'ProgramFilesDir'
+
+
+Get-ItemPropertyValue 'HKCU:\Software\Policies\Microsoft\Edge\RestoreOnStartupURLs' '1'
+
+
+
+Get-Item -Path 'Registry::HKCU\Software\Policies\Microsoft\Edge' | Select-Object -ExpandProperty Property
+
+
+Set-ItemProperty -Path 'HKCU:\Software\Policies\Microsoft\Edge' -Name 'RestoreOnStartup' -Value 0x00000004
+
+
+# SET EDGE STARTUP PAGE GOOGLE
+Set-ItemProperty -Path 'HKCU:\Software\Policies\Microsoft\Edge' -Name 'RestoreOnStartup' -Value 0x00000004
+
+$path = 'HKCU:\Software\Policies\Microsoft\Edge\RestoreOnStartupURLs'
+$name = '1'
+$value = 'https://www.google.com.mx'
+Set-Itemproperty -Path $path -Name $name -Value $value
+
+Set-ItemProperty -Path 'HKCU:\Software\Policies\Microsoft\Edge' -Name 'NewTabPageLocation' -Value 'https://www.google.com.mx'
+
+Set-ItemProperty -Path 'HKCU:\Software\Policies\Microsoft\Edge' -Name 'DefaultSearchProviderSearchURL' -Value '{google:baseURL}search?q=%s&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchboxStats}{google:searchFieldtrialParameter}{google:iOSSearchLanguage}{google:prefetchSource}{google:searchClient}{google:sourceId}{google:contextualSearchVersion}ie={inputEncoding}'
+
+Set-ItemProperty -Path 'HKCU:\Software\Policies\Microsoft\Edge' -Name 'DefaultSearchProviderName' -Value 'Google'
+
+Set-ItemProperty -Path 'HKCU:\Software\Policies\Microsoft\Edge' -Name 'SearchScopes' -Value 0
+HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\SearchScopes
+
+
+
+
+### Search string in all the files in directy
+
+Get-ChildItem -Recurse | Select-String "manejo de" -List | Select Path
+
+
+ Get-Content -Encoding UTF8 "C:\Users\ohernandez\Desktop\Local\Tools\Vumsy\json\2022-07-12 SINNA.json" | Where-Object {$_ -notmatch 'vulnerability_evidence_image_path'}
+
+
+
+
+
+
+
+
+Get-SmbShare Get-SmbShare -Name "VMS1"
+
+# Rutas compartidas local
+Get-SMBShare
+
+# Rutas comaprtidas en servidore remoto
+
+
+
+python -m http.server 9000
+python -m pip install simple-http-server
+
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
+
+
+
+
+
+
+
+Ambos
+Enable-PSRemoting -Force
+Sino
+Enable-PSRemoting -Force -SkipNetworkProfileCheck
+
+Ambos
+ Set-Item WSMan:\localhost\Client\TrustedHosts -Value "*" -Force
+Ambos
+Restart-Service WinRM
+
+Test-WsMan 172.19.51.31
+
+
+$Credential= Get-Credential -UserName ticuser -Message 'Enter Password'
+$sess = New-PSSession -Credential $Credential -ComputerName 172.19.51.31
+Enter-PSSession $sess
+
+<Run commands in remote session> sr3.2020***
+
+Exit-PSSession
+Remove-PSSession $sess
+
+
+
+$User = "ticuser"
+$PWord = ConvertTo-SecureString -String "sr3.2020***" -AsPlainText -Force
+$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
+$sess = New-PSSession -Credential $Credential -ComputerName 172.19.51.31
+Enter-PSSession $sess
+
+Get-PSSession | Remove-PSSession
+
+# Copy file
+Copy-Item -FromSession $sess "C:\Users\TICUSER\Desktop\WinSCP.exe" -Destination "C:\Users\ohernandez\Desktop"
+
+
+
+obtain wifi 
+netsh wlan show profile name="TELECOM" key=clear
+
+all wifi passwords, en español por el "Contenido de la clave"
+
+(netsh wlan show profiles) | Select-String "\:(.+)$" | %{$name=$_.Matches.Groups[1].Value.Trim(); $_} | %{(netsh wlan show profile name="$name" key=clear)} | Select-String "Contenido de la clave\W+\:(.+)$" | %{$pass=$_.Matches.Groups[1].Value.Trim(); $_} | %{[PSCustomObject]@{ PROFILE=$name;PASS=$pass }} | Format-Table -AutoSize
+
+
+
+ ssh -R 9000:localhost:8080 nokey@localhost.run
+
+
+python -m pip install virtualenv
+ virtualenv --python=python2.7 something
+
+
+ python2 -m pip install virtualenv
+ virtualenv --python=python2.7 venv2
+
+curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
+python2 get-pip.py
+python2 -m pip install virtualenv
+virtualenv --python=python2.7 venv2
+python2 -m pip install -r requirements.txt
+
+
+
+
+
+https://console.cloud.google.com/apis/dashboard
+https://dashboard.ngrok.com/get-started/your-authtoken
+
+
+python2 -m pip freeze | grep -v "^-e" | xargs python2 -m pip uninstall -y
+grep -rnw .  -e 'core.ngrok'
+
+pip freeze | grep -v "^-e" | xargs pip uninstall -y
+
+ python3 -m pip freeze | grep -v "^-e" | xargs python3 -m pip uninstall -y
+
+
+ sudo python3 -m pip install -r requirements.txt
+
+
+pip3 install -r requirements.txt
+
+
+
+ netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=8080 connectaddress=localhost connectport=8080
+
+ netsh advfirewall firewall add rule name="Allowing LAN connections" dir=in action=allow protocol=TCP localport=8080
+
+
+
+
+  curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
+
+
+
+
+  2018 answer
+Use clipboard-cli. It works with macOS, Windows, Linux, OpenBSD, FreeBSD, and Android without any real issues.
+
+Install it with:
+
+npm install -g clipboard-cli
+Then you can do:
+
+echo foo | clipboard 
+If you want, you can alias to cb by putting the following in your .bashrc, .bash_profile, or .zshrc:
+
+alias cb=clipboard
+
+
+## NVIM
+Note: When CTRL-V is mapped (e.g., to paste text) you can
+often use CTRL-Q instead |i_CTRL-Q|
+
+# Propagtate changes
+press ctrl+v
+select columns
+press shift+i
+write your text
+press esc
+press "jj"
+
+igual mtliples lineas CNTROL C para borrar

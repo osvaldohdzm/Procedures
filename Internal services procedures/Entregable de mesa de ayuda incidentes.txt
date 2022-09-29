@@ -1,0 +1,9 @@
+15-08-2022 --> 31/08/2022
+15-agosto-2022 --> 31-agosto-2022
+Los eventos de tipo “Common web attack --> eventos de tipo "ataques web comunes
+Eventos de ataques web comunes y A web attack returned code 200 (success)." --> eventos de ataques de directorio transverales y un acceso a recurso con código 200
+ Eventos --> eventos
+"Blacklisted user agent (known malicious user agent)" --> agentes maliciosos en lista negra
+Multiple XSS (Cross Site Scripting) attempts
+A web attack returned code 200 (success)
+3nt&eg@b135-e2t&@t3g1@-a
