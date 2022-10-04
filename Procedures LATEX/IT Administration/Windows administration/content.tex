@@ -494,3 +494,12 @@ set listchars=tab:▸·
 Turn it off with
 set nolist
 
+
+
+
+Search strings:
+
+grep -o '".*"' somefile | tr -d '"'
+
+Delete sctrings from lines
+grep -E 'hash_id' decrypted.txt   | sed 's/"//g' | sed 's/,//g' | sed 's/hash_id//g' | sed 's/://g'| sed -e 's/^\s*//' -e '/^$/d'
