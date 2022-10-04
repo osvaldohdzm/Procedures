@@ -508,6 +508,6 @@ grep -E 'hash_id' decrypted.txt   | sed 's/"//g' c| sed 's/hash_id//g' | sed 's/
 ## Powershell
 
 ### Count the number of files in directory
-'''
+```
 (Get-ChildItem .\Actual\ | Measure-Object).Count
-'''
+```
