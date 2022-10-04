@@ -379,7 +379,7 @@ Remove-PSSession $sess
 
 
 $User = "ticuser"
-$PWord = ConvertTo-SecureString -String "sr3.2020***" -AsPlainText -Force
+$PWord = ConvertTo-SecureString -String "&HOF=9" -AsPlainText -Force
 $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
 $sess = New-PSSession -Credential $Credential -ComputerName 172.19.51.31
 Enter-PSSession $sess
