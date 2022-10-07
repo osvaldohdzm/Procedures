@@ -1,26 +1,22 @@
 
-
-%----------------------------------------------------------------------------------------
-%	SECTIONS
-%----------------------------------------------------------------------------------------
-
-
 sudo apt install python3-pip
 
-\section{Introducción}
+## Introducción
 Administración de sistemas windows
 
 
 Add route to path powrshel
-\begin{lstlisting}[numbers=none]
+```
+
 $newItem = "C:\Program Files (x86)\AnyDesk"
 $old = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name path).path
 $new  =  "$old;$newItem"
 Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name path -Value $new
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-\end{lstlisting}
+```
 
-\section{Connect to Any desk from command line}
+
+## Connect to Any desk from command line
 echo 299792458.Light | anydesk 410112719 --with-password
 Stop-Process -name "AnyDesk"
 
@@ -113,13 +109,17 @@ Go yo recylbeble bin powershell
 C:\$Recycle.Bin\
 
 
-\begin{lstlisting}[numbers=none]
+```
+
 	sudo cat /etc/resolv.conf
-\end{lstlisting}
+```
+
  
-\begin{lstlisting}[numbers=none]
+```
+
 sudo chattr -R -ia /etc/resolv.conf; sudo rm -rf /etc/resolv.conf && sudo touch /etc/resolv.conf && sudo chmod 777 /etc/resolv.conf  && sudo echo "nameserver 172.18.206.36" > /etc/resolv.conf && sudo echo "nameserver 172.18.206.37" >> /etc/resolv.conf && sudo echo "nameserver 8.8.8.8" >> /etc/resolv.conf && sudo echo "nameserver 8.8.4.4" >>  /etc/resolv.conf && sudo chattr +i /etc/resolv.conf
-\end{lstlisting}
+```
+
 
 Disable WSL2 network by executing this:
 Disable-NetAdapter -Name "vEthernet (WSL)"
@@ -130,15 +130,19 @@ Enable-NetAdapter -Name "vEthernet (WSL)"
 New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "vEthernet (WSL)"  -Action Allow
 
 Make chagnes permanten 
-\begin{lstlisting}[numbers=none]
+```
+
 sudo bash -c 'echo "[network]" > /etc/wsl.conf' && sudo bash -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
-\end{lstlisting}
+```
+
 
 And on powershjell Administración
-\begin{lstlisting}[numbers=none]
+```
+
 	wsl.exe --shutdown
 	wsl.exe
-\end{lstlisting}
+```
+
 
 
 
@@ -190,8 +194,15 @@ p
 
 ``
 pip install jsontool
+``
+``
 :%!python -m json.tool --no-ensure-ascii
 ``
+
+``
+:%!python3 -m json.tool  --no-ensure-ascii
+``
+
 
 ``
 :syntax off 
@@ -268,7 +279,7 @@ Marketplace
 
 
 
-\section{EDGE}
+## EDGE
 
 
 New-Item -Path HKCU:\Software\Policies\Microsoft\Edge -Name RestoreOnStartupURLs –Force
@@ -334,7 +345,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\SearchScopes
 Get-ChildItem -Recurse | Select-String "manejo de" -List | Select Path
 
 
- Get-Content -Encoding UTF8 "C:\Users\ohernandez\Desktop\Local\Tools\Vumsy\json\2022-07-12 SINNA.json" | Where-Object {$_ -notmatch 'vulnerability_evidence_image_path'}
+ Get-Content -Encoding UTF8 "C:\Users\ohernandez\Desktop\Local\Tools\Vumsy\json\2022-07-12 SINNA.json" | Where-Object {$_ -notmatch 'vulnerability_evidence_image_path'
 
 
 
