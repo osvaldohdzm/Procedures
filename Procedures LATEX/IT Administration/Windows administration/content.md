@@ -505,7 +505,11 @@ Delete sctrings from lines
 ```
 grep -E 'hash_id' decrypted.txt   | sed 's/"//g' | sed 's/,//g' | sed 's/hash_id//g' | sed 's/://g'| sed -e 's/^\s*//' -e '/^$/d'  >> hash_id_list.txt
 ```
-
+```
+mv hash_id_list.txt  /mnt/c/Users/ohernandez/Desktop/
+```
+	
+	 
 ## Powershell
 
 ### Count the number of files in directory
