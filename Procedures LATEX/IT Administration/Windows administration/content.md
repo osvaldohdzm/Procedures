@@ -502,8 +502,9 @@ Search strings:
 grep -o '".*"' somefile | tr -d '"'
 
 Delete sctrings from lines
-grep -E 'hash_id' decrypted.txt   | sed 's/"//g' c| sed 's/hash_id//g' | sed 's/://g'| sed -e 's/^\s*//' -e '/^$/d'
-
+```
+grep -E 'hash_id' decrypted.txt   | sed 's/"//g' | sed 's/,//g' | sed 's/hash_id//g' | sed 's/://g'| sed -e 's/^\s*//' -e '/^$/d'  >> hash_id_list.txt
+```
 
 ## Powershell
 
