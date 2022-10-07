@@ -183,9 +183,19 @@ p
 :tabnew ..\..\IT\ Administration\Windows\ administration\content.tex
 
 
-
+### NVIM commands for long files
+``
 :set nowrap
+``
+
+``
+pip install jsontool
 :%!python -m json.tool --no-ensure-ascii
+``
+
+``
+:syntax off 
+``
 
 this is not necesari owithoy sintax off
 :set re=0
