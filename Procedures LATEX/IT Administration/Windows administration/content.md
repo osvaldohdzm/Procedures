@@ -556,6 +556,6 @@ Start-Job { & C:\Full\Path\To\my.exe }
 	
 ### SCP Copy
 ```	
-scp -P 28 .\Desktop\Imagen1.png admin@127.0.0.1:c:\Users\Admin\Desktop\python-reportlab-example	
+scp -P 28 .\Desktop\Imagen1.png admin@127.0.0.1:C:\Users\Admin\Desktop\CSVScanHistory\python-reportlab-example
 ```
 	
