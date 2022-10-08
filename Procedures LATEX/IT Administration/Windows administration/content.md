@@ -548,3 +548,14 @@ git branch -m main  # Rename the current branch to master
 git push -f origin main  # Force push master branch to github
 git gc --aggressive --prune=all     # remove the old files
 ```
+
+	
+```	
+Start-Job { & C:\Full\Path\To\my.exe }
+```
+	
+### SCP Copy
+```	
+scp -P 28 .\Desktop\Imagen1.png admin@127.0.0.1:c:\Users\Admin\Desktop\python-reportlab-example	
+```
+	
