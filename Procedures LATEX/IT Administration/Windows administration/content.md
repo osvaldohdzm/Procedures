@@ -570,8 +570,16 @@ scp -P 28 .\Desktop\Imagen1.png admin@127.0.0.1:C:\Users\Admin\Desktop\CSVScanHi
 	
 	
 ### Comando para diviri un archivo de video en varios por tiempo 
+1 minuto
+3 minutos
+6 minutos 
+12 minutos
+20 minutos
 ```
-f=Rompecabezas.mp4; ffmpeg -i "${f}" -acodec copy -f segment -segment_time 10 -vcodec copy -reset_timestamps 1 -map 0 "${f%%.*}"-%d."${f##*.}"  
+sudo apt install ffmpeg	
+f=Rompecabezas.mp4; ffmpeg -i "${f}" -acodec copy -f segment -segment_time 720 -vcodec copy -reset_timestamps 1 -map 0 "${f%%.*}"-%d."${f##*.}"  
+	
+f=CursoReforzamiento4-2022.mkv; sudo ffmpeg -i "${f}" -acodec copy -f segment -segment_time 1200 -vcodec copy -reset_timestamps 1 -map 0 CursoReforzamiento4-2022-%d.mkv
 ```
  
 
