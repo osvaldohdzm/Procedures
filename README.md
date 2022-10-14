@@ -13,11 +13,12 @@ Public Function Traducir(texto As String, sl As String, tl As String) As String
     Dim htmlims As MSHTML.IHTMLElementCollection
     Dim URL As String
         
-    URL = "https://www.bing.com/ttranslatev3?isVertical=1&&IG=677353FCE38746C590369BDE83934B97&IID=translator.5026.9"
+    URL = "https://www.bing.com/ttranslatev3?isVertical=1&&IG=56621AD6CDD14B9B9B9F1E7936027403&IID=translator.5022.1"
             
     sBody = "fromLang=" & sl & _
     "&to=" & tl & _
-    "&text=" & texto
+    "&text=" & texto & _
+    "&token=daK0ULSdP1ckXRcSDCRY1mTdRgBxW8un&key=1665705433206"
     
     XMLPage.Open "Post", URL, False
     XMLPage.setRequestHeader "Content-Type", "application/x-www-form-urlencoded"
@@ -30,6 +31,8 @@ Public Function Traducir(texto As String, sl As String, tl As String) As String
     textoatraducir = Split(XMLPage.responseText, "text"":""")
     traduccion = Split(textoatraducir(1), """")
     Traducir = WorksheetFunction.Proper(traduccion(0))
+    
+    '=Traducir(  ,"en","es")
 
 End Function
 ```
