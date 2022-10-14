@@ -2,6 +2,9 @@
 
 ### TRadeuce VBA
 
+es mejro traaducir gooel shet una hoha en blanco e ir pasando datos
+
+
 ```
 Public Function Traducir(texto As String, sl As String, tl As String) As String
     
