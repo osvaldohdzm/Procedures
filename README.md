@@ -39,3 +39,5 @@ Public Function Traducir(texto As String, sl As String, tl As String) As String
 
 End Function
 ```
+
+git remote get-url origin
