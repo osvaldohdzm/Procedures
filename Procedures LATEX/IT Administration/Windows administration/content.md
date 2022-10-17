@@ -141,6 +141,17 @@ Restart WSL
 wsl --shutdown; wsl
 ```
 
+```
+wget https://github.com/sakai135/wsl-vpnkit/releases/download/v0.3.4/wsl-vpnkit.tar.gz
+wsl --import wsl-vpnkit $env:USERPROFILE\wsl-vpnkit wsl-vpnkit.tar.gz --version 2
+wsl -d wsl-vpnkit
+wsl 
+wsl.exe -d wsl-vpnkit service wsl-vpnkit start
+wsl.exe -d wsl-vpnkit service wsl-vpnkit status >/dev/null ||   wsl.exe -d wsl-vpnkit service wsl-vpnkit start
+```
+
+
+
 
 
 New-NetFirewallRule -DisplayName 'HTTP-Inbound' -Profile @('Domain', 'Private') -Direction Inbound -Action Allow -Protocol TCP -LocalPort @('80', '443', '8080')
@@ -713,3 +724,6 @@ while [[ $CUR_DURATION -lt $DURATION ]]; do
 done  
 ```
  
+
+	
+	
