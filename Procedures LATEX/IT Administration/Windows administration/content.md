@@ -110,39 +110,36 @@ C:\$Recycle.Bin\
 
 
 ```
-
-	sudo cat /etc/resolv.conf
+sudo cat /etc/resolv.conf
 ```
 
- 
 ```
-
 sudo chattr -R -ia /etc/resolv.conf; sudo rm -rf /etc/resolv.conf && sudo touch /etc/resolv.conf && sudo chmod 777 /etc/resolv.conf  && sudo echo "nameserver 172.18.206.36" > /etc/resolv.conf && sudo echo "nameserver 172.18.206.37" >> /etc/resolv.conf && sudo echo "nameserver 8.8.8.8" >> /etc/resolv.conf && sudo echo "nameserver 8.8.4.4" >>  /etc/resolv.conf && sudo chattr +i /etc/resolv.conf
 ```
 
-
-Disable WSL2 network by executing this:
-Disable-NetAdapter -Name "vEthernet (WSL)"
-
-Connect to VPN and then enable WSL2 network by executing this:
-Enable-NetAdapter -Name "vEthernet (WSL)"
- 
-New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "vEthernet (WSL)"  -Action Allow
-
-Make chagnes permanten 
+```
+Get-NetAdapter
 ```
 
+Disable WSL2 network by executing this:
+```
+Disable-NetAdapter -Name "vEthernet (WSL)"
+```
+
+Connect to VPN and then enable WSL2 network by executing this:
+```
+Enable-NetAdapter -Name "vEthernet (WSL)"; New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "vEthernet (WSL)"  -Action Allow
+```
+
+Make the changes permanent
+```
 sudo bash -c 'echo "[network]" > /etc/wsl.conf' && sudo bash -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
 ```
 
-
-And on powershjell Administración
+Restart WSL
 ```
-
-	wsl.exe --shutdown
-	wsl.exe
+wsl --shutdown; wsl
 ```
-
 
 
 
