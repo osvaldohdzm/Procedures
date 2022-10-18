@@ -52,5 +52,22 @@ git remote get-url origin
   105  ls
   106  sudo make install
   107  ls
-  108  ./ddgr
+./ddgr -x
+
+jquery 1.6 vulnerabilities vulnerability exploits exploits vuln  hack zeroday 
+
+type number 
+
+exit q
+
+sudo apt install w3m w3m-img
+export BROWSER=w3m
+w3m xyz.com
+
+sudo apt install lynx
+To get started, you just have to follow the command below:
+
+lynx examplewebsite.com
 ```
+
+
