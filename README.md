@@ -41,3 +41,16 @@ End Function
 ```
 
 git remote get-url origin
+
+
+```
+  100  wget https://github.com/jarun/ddgr/archive/refs/tags/v2.0.tar.gz
+  101  ls
+  102  sudo tar -xvzf v2.0.tar.gz
+  103  ls
+  104  cd ddgr-2.0/
+  105  ls
+  106  sudo make install
+  107  ls
+  108  ./ddgr
+```
