@@ -31,6 +31,10 @@ virtualenv –version
 
 Once virtualenv is installed, we can use it to create virtual environments for our projects. Creating a virtual environment through virtualenv is quite easy. The following command serves the purpose.
 
+
+# See spaces and tabs fiel cat
+ cat file |  tr " " "*" | tr "\t" "&"
+
 virtualenv venv
 
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
