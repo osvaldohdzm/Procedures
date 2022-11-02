@@ -1,5 +1,11 @@
-
+```
 sudo apt install python3-pip
+```
+
+Format sh file.
+```
+dos2unix filename
+```
 
 ## Introducción
 Administración de sistemas windows
