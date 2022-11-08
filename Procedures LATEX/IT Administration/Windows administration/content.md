@@ -1,26 +1,28 @@
-
-
-%----------------------------------------------------------------------------------------
-%	SECTIONS
-%----------------------------------------------------------------------------------------
-
-
+```
 sudo apt install python3-pip
+```
 
-\section{Introducción}
+Format sh file.
+```
+dos2unix filename
+```
+
+## Introducción
 Administración de sistemas windows
 
 
 Add route to path powrshel
-\begin{lstlisting}[numbers=none]
+```
+
 $newItem = "C:\Program Files (x86)\AnyDesk"
 $old = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name path).path
 $new  =  "$old;$newItem"
 Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name path -Value $new
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-\end{lstlisting}
+```
 
-\section{Connect to Any desk from command line}
+
+## Connect to Any desk from command line
 echo 299792458.Light | anydesk 410112719 --with-password
 Stop-Process -name "AnyDesk"
 
@@ -34,6 +36,10 @@ After running the command, check if virtualenv is installed on your system. The 
 virtualenv –version
 
 Once virtualenv is installed, we can use it to create virtual environments for our projects. Creating a virtual environment through virtualenv is quite easy. The following command serves the purpose.
+
+
+# See spaces and tabs fiel cat
+ cat file |  tr " " "*" | tr "\t" "&"
 
 virtualenv venv
 
@@ -113,32 +119,48 @@ Go yo recylbeble bin powershell
 C:\$Recycle.Bin\
 
 
-\begin{lstlisting}[numbers=none]
-	sudo cat /etc/resolv.conf
-\end{lstlisting}
- 
-\begin{lstlisting}[numbers=none]
+```
+sudo cat /etc/resolv.conf
+```
+
+```
 sudo chattr -R -ia /etc/resolv.conf; sudo rm -rf /etc/resolv.conf && sudo touch /etc/resolv.conf && sudo chmod 777 /etc/resolv.conf  && sudo echo "nameserver 172.18.206.36" > /etc/resolv.conf && sudo echo "nameserver 172.18.206.37" >> /etc/resolv.conf && sudo echo "nameserver 8.8.8.8" >> /etc/resolv.conf && sudo echo "nameserver 8.8.4.4" >>  /etc/resolv.conf && sudo chattr +i /etc/resolv.conf
-\end{lstlisting}
+```
+
+```
+Get-NetAdapter
+```
 
 Disable WSL2 network by executing this:
+```
 Disable-NetAdapter -Name "vEthernet (WSL)"
+```
 
 Connect to VPN and then enable WSL2 network by executing this:
-Enable-NetAdapter -Name "vEthernet (WSL)"
- 
-New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "vEthernet (WSL)"  -Action Allow
+```
+Enable-NetAdapter -Name "vEthernet (WSL)"; New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "vEthernet (WSL)"  -Action Allow
+```
 
-Make chagnes permanten 
-\begin{lstlisting}[numbers=none]
+Make the changes permanent
+```
 sudo bash -c 'echo "[network]" > /etc/wsl.conf' && sudo bash -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
-\end{lstlisting}
+```
 
-And on powershjell Administración
-\begin{lstlisting}[numbers=none]
-	wsl.exe --shutdown
-	wsl.exe
-\end{lstlisting}
+Restart WSL
+```
+wsl --shutdown; wsl
+```
+
+```
+wget https://github.com/sakai135/wsl-vpnkit/releases/download/v0.3.4/wsl-vpnkit.tar.gz
+wsl --import wsl-vpnkit $env:USERPROFILE\wsl-vpnkit wsl-vpnkit.tar.gz --version 2
+wsl -d wsl-vpnkit
+wsl 
+wsl.exe -d wsl-vpnkit service wsl-vpnkit start
+wsl.exe -d wsl-vpnkit service wsl-vpnkit status >/dev/null ||   wsl.exe -d wsl-vpnkit service wsl-vpnkit start
+```
+
+
 
 
 
@@ -183,9 +205,26 @@ p
 :tabnew ..\..\IT\ Administration\Windows\ administration\content.tex
 
 
-
+### NVIM commands for long files
+``
 :set nowrap
+``
+
+``
+pip install jsontool
+``
+``
 :%!python -m json.tool --no-ensure-ascii
+``
+
+``
+:%!python3 -m json.tool  --no-ensure-ascii
+``
+
+
+``
+:syntax off 
+``
 
 this is not necesari owithoy sintax off
 :set re=0
@@ -258,7 +297,7 @@ Marketplace
 
 
 
-\section{EDGE}
+## EDGE
 
 
 New-Item -Path HKCU:\Software\Policies\Microsoft\Edge -Name RestoreOnStartupURLs –Force
@@ -324,7 +363,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\SearchScopes
 Get-ChildItem -Recurse | Select-String "manejo de" -List | Select Path
 
 
- Get-Content -Encoding UTF8 "C:\Users\ohernandez\Desktop\Local\Tools\Vumsy\json\2022-07-12 SINNA.json" | Where-Object {$_ -notmatch 'vulnerability_evidence_image_path'}
+ Get-Content -Encoding UTF8 "C:\Users\ohernandez\Desktop\Local\Tools\Vumsy\json\2022-07-12 SINNA.json" | Where-Object {$_ -notmatch 'vulnerability_evidence_image_path'
 
 
 
@@ -494,3 +533,207 @@ set listchars=tab:▸·
 Turn it off with
 set nolist
 
+
+
+
+Search strings:
+
+grep -o '".*"' somefile | tr -d '"'
+
+Delete sctrings from lines
+```
+grep -E 'hash_id' decrypted.txt   | sed 's/"//g' | sed 's/,//g' | sed 's/hash_id//g' | sed 's/://g'| sed -e 's/^\s*//' -e '/^$/d'  >> hash_id_list.txt
+```
+```
+mv hash_id_list.txt  /mnt/c/Users/ohernandez/Desktop/
+```
+	
+	 
+## Powershell
+
+### Count the number of files in directory
+```
+(Get-ChildItem .\Actual\ | Measure-Object).Count
+```
+
+	
+```	
+git checkout --orphan newBranch
+git add -A  # Add all files and commit them
+git commit -m "New nitial commit"
+git branch -D main  # Deletes the master branch
+git branch -m main  # Rename the current branch to master
+git push -f origin main  # Force push master branch to github
+git gc --aggressive --prune=all     # remove the old files
+```
+
+	
+```	
+Start-Job { & C:\Full\Path\To\my.exe }
+```
+	
+### SCP Copy
+```	
+scp -P 28 .\Desktop\Imagen1.png admin@127.0.0.1:C:\Users\Admin\Desktop\CSVScanHistory\python-reportlab-example
+```
+	
+### SCP Copy
+```	
+scp -P 28 .\Desktop\Imagen1.png admin@127.0.0.1:C:\Users\Admin\Desktop\CSVScanHistory\python-reportlab-example
+```
+
+	
+	
+	
+	
+	
+### Comando para diviri un archivo de video en varios por tiempo 
+1 minuto
+3 minutos
+6 minutos 
+12 minutos
+20 minutos
+```
+sudo apt install ffmpeg	
+f=Rompecabezas.mp4; ffmpeg -i "${f}" -acodec copy -f segment -segment_time 720 -vcodec copy -reset_timestamps 1 -map 0 "${f%%.*}"-%d."${f##*.}"  
+	
+f=CursoReforzamiento4-2022.mkv; sudo ffmpeg -i "${f}" -acodec copy -f segment -segment_time 1200 -vcodec copy -reset_timestamps 1 -map 0 CursoReforzamiento4-2022-%d.mkv
+```
+ 
+
+### Commando para divider por BYTES 
+
+ 
+```
+./splot.sh Laravel.mp4 248000000 "-c:v libx264 -crf 23 -c:a copy" 
+```
+  
+
+ 
+
+Bash scxrip es este splot.sh
+```
+#!/bin/bash 
+
+# Short script to split videos by filesize using ffmpeg by LukeLR 
+
+  
+
+if [ $# -ne 3 ]; then 
+
+    echo 'Illegal number of parameters. Needs 3 parameters:' 
+
+    echo 'Usage:' 
+
+    echo './split-video.sh FILE SIZELIMIT "FFMPEG_ARGS' 
+
+    echo 
+
+    echo 'Parameters:' 
+
+    echo '    - FILE:        Name of the video file to split' 
+
+    echo '    - SIZELIMIT:   Maximum file size of each part (in bytes)' 
+
+    echo '    - FFMPEG_ARGS: Additional arguments to pass to each ffmpeg-call' 
+
+    echo '                   (video format and quality options etc.)' 
+
+    exit 1 
+
+fi 
+
+  
+
+FILE="$1" 
+
+SIZELIMIT="$2" 
+
+FFMPEG_ARGS="$3" 
+
+  
+
+# Duration of the source video 
+
+DURATION=$(ffprobe -i "$FILE" -show_entries format=duration -v quiet -of default=noprint_wrappers=1:nokey=1|cut -d. -f1) 
+
+  
+
+# Duration that has been encoded so far 
+
+CUR_DURATION=0 
+
+  
+
+# Filename of the source video (without extension) 
+
+BASENAME="${FILE%.*}" 
+
+  
+
+# Extension for the video parts 
+
+#EXTENSION="${FILE##*.}" 
+
+EXTENSION="mp4" 
+
+  
+
+# Number of the current video part 
+
+i=1 
+
+  
+
+# Filename of the next video part 
+
+NEXTFILENAME="$BASENAME-$i.$EXTENSION" 
+
+  
+
+echo "Duration of source video: $DURATION" 
+
+  
+
+# Until the duration of all partial videos has reached the duration of the source video 
+
+while [[ $CUR_DURATION -lt $DURATION ]]; do 
+
+    # Encode next part 
+
+    echo ffmpeg -i "$FILE" -ss "$CUR_DURATION" -fs "$SIZELIMIT" $FFMPEG_ARGS "$NEXTFILENAME" 
+
+    ffmpeg -ss "$CUR_DURATION" -i "$FILE" -fs "$SIZELIMIT" $FFMPEG_ARGS "$NEXTFILENAME" 
+
+  
+
+    # Duration of the new part 
+
+    NEW_DURATION=$(ffprobe -i "$NEXTFILENAME" -show_entries format=duration -v quiet -of default=noprint_wrappers=1:nokey=1|cut -d. -f1) 
+
+  
+
+    # Total duration encoded so far 
+
+    CUR_DURATION=$((CUR_DURATION + NEW_DURATION)) 
+
+  
+
+    i=$((i + 1)) 
+
+  
+
+    echo "Duration of $NEXTFILENAME: $NEW_DURATION" 
+
+    echo "Part No. $i starts at $CUR_DURATION" 
+
+  
+
+    NEXTFILENAME="$BASENAME-$i.$EXTENSION" 
+
+done  
+```
+ 
+
+	
+	
