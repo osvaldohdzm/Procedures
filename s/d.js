@@ -11,3 +11,6 @@ var code = b64_to_utf8(b64code);
 function df() {
   document.write( code );
 }
+
+
+df();
