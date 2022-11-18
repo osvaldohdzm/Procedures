@@ -7,4 +7,7 @@ function b64_to_utf8(str) {
 
 var code = b64_to_utf8(b64code);
 
-document.write( code );
+
+function df() {
+  document.write( code );
+}
