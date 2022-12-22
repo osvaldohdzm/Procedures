@@ -12,6 +12,32 @@ in
     Data0
 ```
 
+
+Function: getNessusVulnerability
+```
+let
+ getNessusVulnerability = (nessusPluginId as number) as text =>
+            let
+                Source = Web.Page(Web.Contents("https://www.tenable.com/plugins/nessus/" &  Number.ToText(nessusPluginId)  )),
+ #"Se expandió Data" = Table.ExpandTableColumn(Source, "Data", {"Kind", "Name", "Children", "Text"}, {"Data.Kind", "Data.Name", "Data.Children", "Data.Text"}),
+    #"Data Children" = #"Se expandió Data"{0}[Data.Children],
+    Children = #"Data Children"{1}[Children],
+    Children1 = Children{0}[Children],
+    Children2 = Children1{0}[Children],
+    Children3 = Children2{2}[Children],
+    Children4 = Children3{0}[Children],
+    Children5 = Children4{1}[Children],
+    Children6 = Children5{1}[Children],
+    Children7 = Children6{2}[Children],
+    Children8 = Children7{0}[Children],
+    Children9 = Text.Combine( Children8{0}[Children][Text] )
+in
+    Children9
+
+in getNessusVulnerability
+```
+
+
 Function: getNessusDescription
 ```
 let
@@ -71,18 +97,19 @@ in getNessusSolution
 ```
 
 
-QueryNessusData
-```
-let
+QueryTable : 
+```let
     Origen = Excel.CurrentWorkbook(){[Name="Tabla1"]}[Content],
     #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"NessusPluginID", Int64.Type}}),
     #"Personalizada agregada" = Table.AddColumn(#"Tipo cambiado", "Personalizado", each getNessusSolution([NessusPluginID]) ),
-    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Personalizada agregada",{{"Personalizado", "Solution"}})
+    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Personalizada agregada",{{"Personalizado", "Solution"}}),
+    #"Personalizada agregada1" = Table.AddColumn(#"Columnas con nombre cambiado", "Personalizado", each getNessusDescription([NessusPluginID])),
+    #"Columnas con nombre cambiado1" = Table.RenameColumns(#"Personalizada agregada1",{{"Personalizado", "Description"}})
 in
-    #"Columnas con nombre cambiado"
+    #"Columnas con nombre cambiado1"
 ```
 
-Test with  
+Test with  26920
 
 """
 Google Translation API (free version) is the web service that we will use to translate between languages.
