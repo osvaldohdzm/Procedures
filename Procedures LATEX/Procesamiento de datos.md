@@ -19,7 +19,7 @@ let
  getNessusReferences= (nessusPluginId as number) as text =>
             let
                 Source = Web.Page(Web.Contents("https://www.tenable.com/plugins/nessus/" &  Number.ToText(nessusPluginId)  )),
- #"Se expandió Data" = Table.ExpandTableColumn(Source, "Data", {"Kind", "Name", "Children", "Text"}, {"Data.Kind", "Data.Name", "Data.Children", "Data.Text"}),
+  #"Se expandió Data" = Table.ExpandTableColumn(Source, "Data", {"Kind", "Name", "Children", "Text"}, {"Data.Kind", "Data.Name", "Data.Children", "Data.Text"}),
     #"Data Children" = #"Se expandió Data"{0}[Data.Children],
     Children = #"Data Children"{1}[Children],
     Children1 = Children{0}[Children],
@@ -28,11 +28,18 @@ let
     Children4 = Children3{0}[Children],
     Children5 = Children4{1}[Children],
     Children6 = Children5{1}[Children],
-    Children7 = Children6{2}[Children],
+    Children7 = Children6{3}[Children],
     Children8 = Children7{0}[Children],
-    Children9 = Text.Combine( Children8{0}[Children][Text] )
+    Children9 = Children8{1}[Children],
+    Children10 = Children9{0}[Children],
+    Children11 = Children10{0}[Children],
+    Children12 = Children11{0}[Children],
+    Children13 = Children12{3}[Children],
+    #"Se expandió Children" = Table.ExpandTableColumn(Children13, "Children", {"Kind", "Name", "Children", "Text"}, {"Children.Kind", "Children.Name", "Children.Children", "Children.Text"}),
+    #"Se expandió Children.Children" = Table.ExpandTableColumn(#"Se expandió Children", "Children.Children", {"Kind", "Name", "Children", "Text"}, {"Children.Children.Kind", "Children.Children.Name", "Children.Children.Children", "Children.Children.Text"})[Children.Children.Text],
+    #"Elementos superiores quitados" = Text.Combine( List.Skip(#"Se expandió Children.Children",1) , "#(lf)")
 in
-    Children9
+    #"Elementos superiores quitados"
 
 in getNessusReferences
 ```
