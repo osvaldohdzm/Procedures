@@ -126,6 +126,98 @@ in
 in getNessusSolution
 ```
 
+Function: getNessusSeverity
+```
+let
+   getNessusSeverity = (nessusPluginId as number) as text =>
+            let
+                Source = Web.Page(Web.Contents("https://www.tenable.com/plugins/nessus/" &  Number.ToText(nessusPluginId) )),
+ #"Se expandió Data" = Table.ExpandTableColumn(Source, "Data", {"Kind", "Name", "Children", "Text"}, {"Data.Kind", "Data.Name", "Data.Children", "Data.Text"}),
+    #"Data Children" = #"Se expandió Data"{0}[Data.Children],
+    Children = #"Data Children"{1}[Children],
+    Children1 = Children{0}[Children],
+    Children2 = Children1{0}[Children],
+    Children3 = Children2{2}[Children],
+    Children4 = Children3{0}[Children],
+    Children5 = Children4{1}[Children],
+    Children6 = Children5{1}[Children],
+    Children7 = Children6{3}[Children],
+    Children8 = Children7{0}[Children],
+    Children9 = Children8{1}[Children],
+    Children10 = Children9{0}[Children],
+    Children11 = Children10{0}[Children],
+    Children12 = Children11{1}[Children],
+    Children13 = Children12{1}[Children],
+    Children14 = Children13{0}[Children],
+    Children15 = Text.Combine( Children14{1}[Children][Text] , "#(lf)" )
+in
+    Children15
+
+in getNessusSeverity
+```
+
+Function: getNessusCVE
+```
+let
+   getNessusCVE = (nessusPluginId as number) as text =>
+            let
+                Source = Web.Page(Web.Contents("https://www.tenable.com/plugins/nessus/" &  Number.ToText(nessusPluginId) )),
+ #"Se expandió Data" = Table.ExpandTableColumn(Source, "Data", {"Kind", "Name", "Children", "Text"}, {"Data.Kind", "Data.Name", "Data.Children", "Data.Text"}),
+    #"Data Children" = #"Se expandió Data"{0}[Data.Children],
+    Children = #"Data Children"{1}[Children],
+    Children1 = Children{0}[Children],
+    Children2 = Children1{0}[Children],
+    Children3 = Children2{2}[Children],
+    Children4 = Children3{0}[Children],
+    Children5 = Children4{1}[Children],
+    Children6 = Children5{1}[Children],
+    Children7 = Children6{3}[Children],
+    Children8 = Children7{0}[Children],
+    Children9 = Children8{1}[Children],
+    Children10 = Children9{0}[Children],
+    Children11 = Children10{0}[Children],
+    Children12 = Children11{1}[Children],
+    Children13 = Children12{26}[Children],
+    Children14 = Children13{1}[Children],
+    Children15 = Children14{1}[Children],
+    Children16 = Text.Combine( Children15{0}[Children][Text] , "#(lf)" )
+in
+    Children16
+
+in getNessusCVE
+```
+
+Function: getNessusCVSSVector
+```
+let
+   getNessusCVSSVector = (nessusPluginId as number) as text =>
+            let
+                Source = Web.Page(Web.Contents("https://www.tenable.com/plugins/nessus/" &  Number.ToText(nessusPluginId) )),
+ #"Se expandió Data" = Table.ExpandTableColumn(Source, "Data", {"Kind", "Name", "Children", "Text"}, {"Data.Kind", "Data.Name", "Data.Children", "Data.Text"}),
+    #"Data Children" = #"Se expandió Data"{0}[Data.Children],
+    Children = #"Data Children"{1}[Children],
+    Children1 = Children{0}[Children],
+    Children2 = Children1{0}[Children],
+    Children3 = Children2{2}[Children],
+    Children4 = Children3{0}[Children],
+    Children5 = Children4{1}[Children],
+    Children6 = Children5{1}[Children],
+    Children7 = Children6{3}[Children],
+    Children8 = Children7{0}[Children],
+    Children9 = Children8{1}[Children],
+    Children10 = Children9{0}[Children],
+    Children11 = Children10{0}[Children],
+    Children12 = Children11{1}[Children],
+    Children13 = Children12{22}[Children],
+    Children14 = Children13{0}[Children],
+    Children15 = Text.Combine(  Children14{1}[Children][Text] , "#(lf)" )
+in
+    Children15
+
+in getNessusCVSSVector
+```
+
+
 
 QueryTable : 
 ```let
@@ -308,3 +400,9 @@ It has been written in M code.	M kodunda yazılmıştır.
 # Excel
 
 # Power BI
+
+
+
+# JavaScript
+
+Obtain manual data
