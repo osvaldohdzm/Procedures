@@ -15,6 +15,8 @@ tl is used fr Target language ISO code.
 q is the text to be translated.
 This API endpoint returns a JSON file in array format which contains Turkish translation of "Good morning" text given in English. You can change the sl or tl parameters to translate to or from other languages. See the complete list of ISO language codes in the second column of Codes for the Representation of Names of Languages.
 JSON:
+
+```
 [
     [
         [
@@ -27,15 +29,19 @@ JSON:
     ]
     ,null,"en",null,null,null,null,[]
 ]
+```
 
 If we name this array as Source, then Source[0][0][0] array element contains the translated text. (Remember that Power Query starts numbering at zero, so Source[0][0][0] is saying the first item in the first list in the first field of the returned data.) To use Power Query for translating, you need some M code that will request this JSON file, parse its content, and load the data after some transformation to present the corresponding translation in tabular format.
 
 Web.Contents is the M language function that we use to read an API endpoint by providing query parameters. Create a blank query in Power Query, switch to the advanced editor, and paste the following M code.
 Power Query:
+
+```
 let
     Source = Web.Contents("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=tr&dt=t&q=Good Morning")
 in
     Source
+```
 
 As soon as we run the query, we will be notified to specify how we would like to connect to the web service unless you already defined permission for the Google Translation API endpoint. Click on the Edit Credentials button.
 Specify how to connect
@@ -51,13 +57,14 @@ Web.Contents function
 
 We need to parse this JSON file to access the translated text. Json.Document is the function which is responsible of parsing the JSON content. Use Json.Document function as shown below.
 Power Query:
+```
 let
     Source = Json.Document(
         Web.Contents("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=tr&dt=t&q=Good Morning")
     )
 in
     Source
-
+```
 Alternatively, you can right click on the downloaded file and select JSON to automatically apply Json.Document function.
 
 Json.Document function
@@ -65,6 +72,8 @@ Json.Document function
 
 Json.Document returns a list which contains the array that we discussed previously. We also discussed that Source[0][0][0] is the translated text we want to get. So, let's set the Result variable to include this array value, but using curly braces as it is used to access list element items in M code.
 Power Query:
+
+```
 let
     Source = Json.Document(
         Web.Contents("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=tr&dt=t&q=Good Morning")
@@ -72,6 +81,7 @@ let
     Result = Source{0}{0}{0}
 in
     Result
+```
 
 Let's see how it works by analyzing the steps individually.
 First, we retrieve the root element returned as Source.
@@ -89,7 +99,9 @@ It is translating from English to another language
 It has been written in M code.
 
 Copy and paste the following code into a blank query. I intentionally included a custom function, fnTranslate(), to demonstrate basic encapsulation and reusability in M code. We don't have to do this in this project but it provides more readable code. Also, we can even create the custom function as another query and call it in many other queries.
+
 Power Query:
+```
 let
     fnTranslate =
         (original as text) as text =>
@@ -111,30 +123,40 @@ let
     )
 in
     Result
+```
 
 Let's break down this code.
 fnTranslate = (original as text) as text => let ... in ... custom function; We create a function which takes a text in English as the only parameter and does the translation as we did in the previous sample above. It still translates single text but it will be called for each row in the source table.
 Excel.CurrentWorkbook(){[Name="Original"]}[Content]: We get the source data into Power Query by using Excel.CurrentWorkbook function. Excel.CurrentWorkbook function returns a table including records consist of Excel ListObjects (worksheet tables), named ranges, and dynamic ranges in the current workbook with Content and Name fields.
+
 Excel.CurrentWorkbook function
 Excel.CurrentWorkbook function
+
 Each table row is a record in M language and each record can be selected by the row index which is starting from 0. So, myTable{0} returns the first row in a table called myTable. However, rows can be also referenced by their field values in case there is only one matched record. Since Excel table names are unique in a workbook, we can simply use this method to get the table by its name into Power Query by simply passing [Name="Original"] record instead of row index as shown below.
+
 Retrieve Table / ListObject by name
 Retrieve Table / ListObject by name
+
 Each field in a record can be referenced by the field name in square brackets after the record identifier. So, using the sample table in the previous step, myTable{0}[field1] returns field1 field value of the first row from myTable table. Finally, we get the Content field value as a table by referencing with the field name.
+
 Expand table in Power Query
 Expand table in Power Query
+
 TransformColumnTypes(Source,{{"English", type text}}): M language is a strict language about data types, that's why the amazing Power Query user interface always changes the row types appropriately before making any processing in records by using functions which require parameters in certain data types. Since our custom function also requires a text data type, we use Table.TransformColumnTypes function to define the field type as text.
 Table.AddColumn(...): This is the step where we use Table.AddColumn function to create a new column to return translated text. Table.AddColumn function takes four parameters:
+
 table: Source table to add a new column.
 newColumnName: New column's name.
 columnGenerator: A function to return new column values by processing each record in the table. We run fnTranslate() function with a text parameter to call Google Translation API for each record - . [English] is the English field (column) value for the selected row.fnTranslate([English])
 columnType: This parameter defines the type of the new column. Since the new column is supposed to return text values, we used . We can also use the equivalent value, . For more information, see M Language types.type textText.Type
+
 Finally, we get the following result when we run this query.
 Result
 Result
 
 Load query to the worksheet. Try adding some more text in English into the "Original" table, and refreshing the table. Finally, we have a working translator in Excel!
 English	Turkish
+
 This is a Power Query sample.	Bu bir Power Query örneğidir.
 It is translating from English to another language	İngilizceden başka bir dile çeviri yapıyor
 It has been written in M code.	M kodunda yazılmıştır.
