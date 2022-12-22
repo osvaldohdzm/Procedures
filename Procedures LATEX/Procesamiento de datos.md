@@ -13,6 +13,29 @@ in
 ```
 
 
+Function: getNessusReferences
+```
+let
+ getNessusReferences= (nessusPluginId as number) as text =>
+            let
+                Source = Web.Page(Web.Contents("https://www.tenable.com/plugins/nessus/" &  Number.ToText(nessusPluginId)  )),
+ #"Se expandió Data" = Table.ExpandTableColumn(Source, "Data", {"Kind", "Name", "Children", "Text"}, {"Data.Kind", "Data.Name", "Data.Children", "Data.Text"}),
+    #"Data Children" = #"Se expandió Data"{0}[Data.Children],
+    Children = #"Data Children"{1}[Children],
+    Children1 = Children{0}[Children],
+    Children2 = Children1{0}[Children],
+    Children3 = Children2{2}[Children],
+    Children4 = Children3{0}[Children],
+    Children5 = Children4{1}[Children],
+    Children6 = Children5{1}[Children],
+    Children7 = Children6{2}[Children],
+    Children8 = Children7{0}[Children],
+    Children9 = Text.Combine( Children8{0}[Children][Text] )
+in
+    Children9
+
+in getNessusReferences
+```
 Function: getNessusVulnerability
 ```
 let
