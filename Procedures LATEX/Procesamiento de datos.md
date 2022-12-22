@@ -2,6 +2,8 @@
 
 ## Translate text
 
+
+Example of web query
 ```
 let
     Origen = Web.Page(Web.Contents("https://www.tenable.com/plugins/nessus/34460")),
@@ -9,14 +11,46 @@ let
 in
     Data0
 ```
+
+Function: getNessusDescription
+```
+let
+ getNessusDescription = (nessusPluginId as number) as text =>
+            let
+                Source = Web.Page(Web.Contents("https://www.tenable.com/plugins/nessus/" &  Number.ToText(nessusPluginId)  )),
+ #"Se expandió Data" = Table.ExpandTableColumn(Source, "Data", {"Kind", "Name", "Children", "Text"}, {"Data.Kind", "Data.Name", "Data.Children", "Data.Text"}),
+    #"Data Children" = #"Se expandió Data"{0}[Data.Children],
+    Children = #"Data Children"{1}[Children],
+    Children1 = Children{0}[Children],
+    Children2 = Children1{0}[Children],
+    Children3 = Children2{2}[Children],
+    Children4 = Children3{0}[Children],
+    Children5 = Children4{1}[Children],
+    Children6 = Children5{1}[Children],
+    Children7 = Children6{3}[Children],
+    Children8 = Children7{0}[Children],
+    Children9 = Children8{1}[Children],
+    Children10 = Children9{0}[Children],
+    Children11 = Children10{0}[Children],
+    Children12 = Children11{0}[Children],
+    Children13 = Children12{1}[Children],
+    Result = Text.Replace(    Text.Combine( Table.ExpandTableColumn(Children13, "Children", {"Kind", "Name", "Children", "Text"}, {"Children.Kind", "Children.Name", "Children.Children", "Children.Text"})[Children.Text], "#(lf)" ) , "Description#(lf)", "")
+in
+    Result
+
+in getNessusDescription
 ```
 
- let
-                Source = Web.Page(Web.Contents("https://www.tenable.com/plugins/nessus/" & nessusPluginId)),
+Function: getNessusSolution
+```
+let
+   getNessusSolution = (nessusPluginId as number) as text =>
+            let
+                Source = Web.Page(Web.Contents("https://www.tenable.com/plugins/nessus/" &  Number.ToText(nessusPluginId) )),
                 nessusData = Source{0}[Data],
     #"Se expandió Children" = Table.ExpandTableColumn(nessusData , "Children", {"Kind", "Name", "Children", "Text"}, {"Children.Kind", "Children.Name", "Children.Children", "Children.Text"}),
     #"Children Children" = #"Se expandió Children"{1}[Children.Children],
-    Children = #"Children Children"{0}[Children],
+   Children = #"Children Children"{0}[Children],
     Children1 = Children{0}[Children],
     Children2 = Children1{2}[Children],
     Children3 = Children2{0}[Children],
@@ -29,45 +63,26 @@ in
     Children10 = Children9{0}[Children],
     Children11 = Children10{0}[Children],
     Children12 = Children11{2}[Children],
-    Children13 = Children12{1}[Children][Text]{0}
+    #"Se expandió Children1" = Text.Replace(    Text.Combine(  Table.ExpandTableColumn(Children12, "Children", {"Text"}, {"Children.Text"})[Children.Text] , "#(lf)" ) , "Solution#(lf)", "")
 in
-    Children13
+    #"Se expandió Children1"
+
+in getNessusSolution
 ```
+
+
 QueryNessusData
 ```
 let
-   getNessusSolution = (nessusPluginId as text) as text =>
-            let
-                Source = Web.Page(Web.Contents("https://www.tenable.com/plugins/nessus/" & nessusPluginId)),
-                nessusData = Source{0}[Data],
-    #"Se expandió Children" = Table.ExpandTableColumn(nessusData , "Children", {"Kind", "Name", "Children", "Text"}, {"Children.Kind", "Children.Name", "Children.Children", "Children.Text"}),
-    #"Children Children" = #"Se expandió Children"{1}[Children.Children],
-    Children = #"Children Children"{0}[Children],
-    Children1 = Children{0}[Children],
-    Children2 = Children1{2}[Children],
-    Children3 = Children2{0}[Children],
-    Children4 = Children3{1}[Children],
-    Children5 = Children4{1}[Children],
-    Children6 = Children5{3}[Children],
-    Children7 = Children6{0}[Children],
-    Children8 = Children7{1}[Children],
-    Children9 = Children8{0}[Children],
-    Children10 = Children9{0}[Children],
-    Children11 = Children10{0}[Children],
-    Children12 = Children11{2}[Children],
-    Children13 = Children12{1}[Children][Text]{0}
-in
-    Children13,
-
     Origen = Excel.CurrentWorkbook(){[Name="Tabla1"]}[Content],
     #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"NessusPluginID", Int64.Type}}),
-    #"Personalizada agregada" = Table.AddColumn(#"Tipo cambiado", "Personalizado", each getNessusSolution( Number.ToText([NessusPluginID])  )),
+    #"Personalizada agregada" = Table.AddColumn(#"Tipo cambiado", "Personalizado", each getNessusSolution([NessusPluginID]) ),
     #"Columnas con nombre cambiado" = Table.RenameColumns(#"Personalizada agregada",{{"Personalizado", "Solution"}})
 in
     #"Columnas con nombre cambiado"
 ```
 
-Test with 34460
+Test with  
 
 """
 Google Translation API (free version) is the web service that we will use to translate between languages.
