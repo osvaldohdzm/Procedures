@@ -1,5 +1,75 @@
 # Powerquery
 
+## Translate text
+
+```
+let
+    Origen = Web.Page(Web.Contents("https://www.tenable.com/plugins/nessus/34460")),
+    Data0 = Origen{0}[Data]
+in
+    Data0
+```
+```
+
+ let
+                Source = Web.Page(Web.Contents("https://www.tenable.com/plugins/nessus/" & nessusPluginId)),
+                nessusData = Source{0}[Data],
+    #"Se expandió Children" = Table.ExpandTableColumn(nessusData , "Children", {"Kind", "Name", "Children", "Text"}, {"Children.Kind", "Children.Name", "Children.Children", "Children.Text"}),
+    #"Children Children" = #"Se expandió Children"{1}[Children.Children],
+    Children = #"Children Children"{0}[Children],
+    Children1 = Children{0}[Children],
+    Children2 = Children1{2}[Children],
+    Children3 = Children2{0}[Children],
+    Children4 = Children3{1}[Children],
+    Children5 = Children4{1}[Children],
+    Children6 = Children5{3}[Children],
+    Children7 = Children6{0}[Children],
+    Children8 = Children7{1}[Children],
+    Children9 = Children8{0}[Children],
+    Children10 = Children9{0}[Children],
+    Children11 = Children10{0}[Children],
+    Children12 = Children11{2}[Children],
+    Children13 = Children12{1}[Children][Text]{0}
+in
+    Children13
+```
+QueryNessusData
+```
+let
+   getNessusSolution = (nessusPluginId as text) as text =>
+            let
+                Source = Web.Page(Web.Contents("https://www.tenable.com/plugins/nessus/" & nessusPluginId)),
+                nessusData = Source{0}[Data],
+    #"Se expandió Children" = Table.ExpandTableColumn(nessusData , "Children", {"Kind", "Name", "Children", "Text"}, {"Children.Kind", "Children.Name", "Children.Children", "Children.Text"}),
+    #"Children Children" = #"Se expandió Children"{1}[Children.Children],
+    Children = #"Children Children"{0}[Children],
+    Children1 = Children{0}[Children],
+    Children2 = Children1{2}[Children],
+    Children3 = Children2{0}[Children],
+    Children4 = Children3{1}[Children],
+    Children5 = Children4{1}[Children],
+    Children6 = Children5{3}[Children],
+    Children7 = Children6{0}[Children],
+    Children8 = Children7{1}[Children],
+    Children9 = Children8{0}[Children],
+    Children10 = Children9{0}[Children],
+    Children11 = Children10{0}[Children],
+    Children12 = Children11{2}[Children],
+    Children13 = Children12{1}[Children][Text]{0}
+in
+    Children13,
+
+    Origen = Excel.CurrentWorkbook(){[Name="Tabla1"]}[Content],
+    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"NessusPluginID", Int64.Type}}),
+    #"Personalizada agregada" = Table.AddColumn(#"Tipo cambiado", "Personalizado", each getNessusSolution( Number.ToText([NessusPluginID])  )),
+    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Personalizada agregada",{{"Personalizado", "Solution"}})
+in
+    #"Columnas con nombre cambiado"
+```
+
+Test with 34460
+
+"""
 Google Translation API (free version) is the web service that we will use to translate between languages.
 Google Translation API (free version) has some known limitations. This is not a bug but Google's design to lower the number of allowed requests per IP in a certain amount of time. So, try sending fewer requests basically by not refreshing the query often and keeping the translation list short. Please note this article's purpose is to demonstrate using Power Query to make simple API calls and work with retrieved data.
 
