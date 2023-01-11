@@ -2,6 +2,9 @@
 sudo apt install python3-pip
 ```
 
+para vorrar discos durso con certificado Kill disk ultimate 
+
+
 Format sh file.
 ```
 dos2unix filename
