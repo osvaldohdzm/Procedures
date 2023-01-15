@@ -5,6 +5,19 @@ python .\vumsy-cli.py  -j .\config.json --load appvulns -f "C:\\Users\\ohernande
 ```
 python .\vumsy-cli.py  -j .\config.json --export vulnerabilities
 ```
+```
+python .\vumsy-cli.py  -j .\config.json --update vulnerabilities
+```
+
+
+rules.sonarsource.com "javascript:S5852"
+sonarsource.github.io "javascript:S5852"
+https://sonarsource.github.io/rspec/#/rspec/?query=S5852
+
+https://sonarsource.github.io/rspec/#/rspec/S5852
+severity
+
+
 
 
  -h, --help       show this help message and exit
