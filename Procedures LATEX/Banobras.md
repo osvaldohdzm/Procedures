@@ -2,6 +2,18 @@
 ```
 python .\vumsy-cli.py  -j .\config.json --load appvulns -f "C:\\Users\\ohernandez\\Desktop\\SourceCodeAnalize\\code_issues_coa.csv"
 ```
+```
+python .\vumsy-cli.py  -j .\config.json --export vulnerabilities
+```
+
+
+ -h, --help       show this help message and exit
+  -j J             JSON config file report path
+  --update UPDATE  Update value
+  --load LOAD      Load value to db
+  --export EXPORT  Export csv from database table
+  --report REPORT  Generate a report
+  -f F             File path to use
 
 Excel
 
