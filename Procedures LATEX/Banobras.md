@@ -68,6 +68,6 @@ sonar-findings-export -k "BANOBRAS-COAS" -o BANOBRAS-COAS.csv
 ```
 # Exports all issues of project myProjectKey
 ```
-sonar-findings-export -k "BANOBRAS-COAS" -o BANOBRAS-COAS.csv
+sonar-findings-export -k "BANOBRAS-PCC" -o code_issues_pcc.csv
 ```
 
