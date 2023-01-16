@@ -12,10 +12,11 @@ python .\vumsy-cli.py  -j .\config.json --update vulnerabilities
 ```
 python .\vumsy-cli.py  -j .\config.json --load appvulns -f "C:\Users\ohernandez\Desktop\SourceCodeAnalize\code_issues_pcc.csv" --loaddate "11/01/2023"
 ```
+```
+python .\vumsy-cli.py  -j .\config.json --load appvulns -f "C:\Users\ohernandez\Desktop\SourceCodeAnalize\code_issues_pcc.csv" --loaddate "11/01/2023"
+```
 
-```
-startSonar
-```
+
 
 rules.sonarsource.com "javascript:S5852"
 sonarsource.github.io "javascript:S5852"
@@ -71,3 +72,11 @@ sonar-findings-export -k "BANOBRAS-COAS" -o BANOBRAS-COAS.csv
 sonar-findings-export -k "BANOBRAS-PCC" -o code_issues_pcc.csv
 ```
 
+```
+startSonar
+```
+
+```
+ sonar-findings-export -t "squ_0912a286a9be86060d4e00abaa45f832f0edfa56" -u "http://localhost:9000" -k "BANOBRAS-COAS" -f code_issues_coa.csv --format csv --types SECURITY_HOTSPOT,VULNERABILITY
+ ```
+ 
