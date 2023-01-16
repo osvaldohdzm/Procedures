@@ -9,6 +9,10 @@ python .\vumsy-cli.py  -j .\config.json --export vulnerabilities
 python .\vumsy-cli.py  -j .\config.json --update vulnerabilities
 ```
 
+```
+python .\vumsy-cli.py  -j .\config.json --load appvulns -f "C:\Users\ohernandez\Desktop\SourceCodeAnalize\code_issues_pcc.csv" --loaddate "11/01/2023"
+```
+
 
 rules.sonarsource.com "javascript:S5852"
 sonarsource.github.io "javascript:S5852"
