@@ -31,6 +31,12 @@ python .\vumsy-cli.py  -j .\config.json --gentemplate newdavbanobras --name "COA
 ```
 
 
+### Generate report static vulnerabilities
+```
+python .\vumsy-cli.py  -j .\config.json --load appvulnsd -f "C:\Users\ohernandez\Desktop\DynamicAnalysis\DAV-COAS\Hallazgos-vulnerabilidades-COAS.xlsx"  --loaddate "31/12/2022"
+
+```
+
 ### Load Dynamic Code Analysis
 ```
 python .\vumsy-cli.py  -j .\config.json --load appvulnsd -f "C:\Users\ohernandez\Desktop\DynamicAnalysis\DAV-COAS\Hallazgos-vulnerabilidades-COAS.xlsx"  --loaddate "31/12/2022"
