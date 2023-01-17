@@ -25,11 +25,7 @@ python .\vumsy-cli.py  -j .\config.json --genreport apps_vulns_matrix_banobras -
 Generate new template dynamic analysis:
 
 ```
-python .\vumsy-cli.py  -j .\config.json --gentemplate newdav
-```
-
-```
-python .\vumsy-cli.py  -j .\config.json --gentemplate newdav --name "COAS"
+python .\vumsy-cli.py  -j .\config.json --gentemplate newdavbanobras --name "COAS"
 ```
 
 rules.sonarsource.com "javascript:S5852"
