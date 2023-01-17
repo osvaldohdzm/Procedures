@@ -16,7 +16,9 @@ python .\vumsy-cli.py  -j .\config.json --load appvulns -f "C:\Users\ohernandez\
 python .\vumsy-cli.py  -j .\config.json --load appvulns -f "C:\Users\ohernandez\Desktop\SourceCodeAnalize\code_issues_pcc.csv" --loaddate "11/01/2023"
 ```
 
-
+```
+python .\vumsy-cli.py  -j .\config.json --genreport apps_vulns_matrix_banobras --startdate "01/12/2022" --enddate "31/12/2022" --gendate "06/01/2023"
+```
 
 rules.sonarsource.com "javascript:S5852"
 sonarsource.github.io "javascript:S5852"
