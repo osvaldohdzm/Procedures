@@ -34,6 +34,7 @@ python .\vumsy-cli.py  -j .\config.json --gentemplate newdavbanobras --name "COA
 ### Load Dynamic Code Analysis
 ```
 python .\vumsy-cli.py  -j .\config.json --load appvulnsd -f "C:\Users\ohernandez\Desktop\DynamicAnalysis\DAV-COAS\Hallazgos-vulnerabilidades-COAS.xlsx"  --loaddate "31/12/2022"
+
 ```
 
 rules.sonarsource.com "javascript:S5852"
