@@ -39,8 +39,7 @@ python .\vumsy-cli.py  -j .\config.json --load appvulnsd -f "C:\Users\ohernandez
 
 ### Generate report static vulnerabilities
 ```
-python .\vumsy-cli.py  -j .\config.json --load appvulnsd -f "C:\Users\ohernandez\Desktop\DynamicAnalysis\DAV-COAS\Hallazgos-vulnerabilidades-COAS.xlsx"  --loaddate "31/12/2022"
-
+python .\vumsy-cli.py  -j .\config.json --genreport apps_vulns_matrix_banobras --startdate "01/12/2022" --enddate "31/12/2022" --gendate "06/01/2023"
 ```
 
 rules.sonarsource.com "javascript:S5852"
