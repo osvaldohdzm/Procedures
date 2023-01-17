@@ -13,19 +13,27 @@ python .\vumsy-cli.py  -j .\config.json --update vulnerabilities
 python .\vumsy-cli.py  -j .\config.json --load appvulns -f "C:\Users\ohernandez\Desktop\SourceCodeAnalize\code_issues_pcc.csv" --loaddate "11/01/2023"
 ```
 
-### Report comands VUMSY
+### Load Static Code Analysis
 ```
-python .\vumsy-cli.py  -j .\config.json --load appvulns -f "C:\Users\ohernandez\Desktop\SourceCodeAnalize\code_issues_pcc.csv" --loaddate "11/01/2023"
+python .\vumsy-cli.py  -j .\config.json --load appvulnse -f "C:\Users\ohernandez\Desktop\SourceCodeAnalize\code_issues_pcc.csv" --loaddate "11/01/2023"
 ```
+
+### Generate Apps Matrix 
 
 ```
 python .\vumsy-cli.py  -j .\config.json --genreport apps_vulns_matrix_banobras --startdate "01/12/2022" --enddate "31/12/2022" --gendate "06/01/2023"
 ```
 
-Generate new template dynamic analysis:
+### Generate template for New Dynamic Analysis
 
 ```
 python .\vumsy-cli.py  -j .\config.json --gentemplate newdavbanobras --name "COAS"
+```
+
+
+### Load Dynamic Code Analysis
+```
+python .\vumsy-cli.py  -j .\config.json --load appvulnsd -f "C:\Users\ohernandez\Desktop\DynamicAnalysis\DAV-COAS\Hallazgos-vulnerabilidades-COAS.xlsx"  --loaddate "31/12/2022"
 ```
 
 rules.sonarsource.com "javascript:S5852"
