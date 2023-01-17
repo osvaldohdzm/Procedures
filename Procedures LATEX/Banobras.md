@@ -80,6 +80,9 @@ Formatos de word
 Elimitar Deer ecaner esatico superior derecnho
 Borrar imagenes
 
+## Python libraries
+
+Para python hay que copias las lirbeari globales en sites-packages
 
 
 ```
