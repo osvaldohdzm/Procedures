@@ -40,6 +40,12 @@ python .\vumsy-cli.py  -j .\config.json --load appvulnse -f "C:\Users\ohernandez
 python .\vumsy-cli.py  -j .\config.json --load appvulnsd -f "C:\Users\ohernandez\Desktop\DynamicAnalysis\DAV-COAS\Hallazgos-vulnerabilidades-COAS.xlsx"  --loaddate "31/12/2022"
 
 ```
+
+### Load Vulns Host History
+```
+python .\vumsy-cli.py  -j .\config.json --load hostvulnshist -f "C:\Users\ohernandez\Desktop\DynamicAnalysis\DAV-COAS\Hallazgos-vulnerabilidades-COAS.xlsx" 
+
+```
 ## Generate
 
 ### Generate report static vulnerabilities
