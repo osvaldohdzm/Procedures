@@ -8,9 +8,7 @@ New-Item -ItemType SymbolicLink -Path "Link" -Target "Target"
 ```
 python .\vumsy-cli.py  -j .\config.json --load appvulns -f "C:\\Users\\ohernandez\\Desktop\\SourceCodeAnalize\\code_issues_coa.csv"
 ```
-```
-python .\vumsy-cli.py  -j .\config.json --export vulnerabilities
-```
+
 ```
 python .\vumsy-cli.py  -j .\config.json --update vulnerabilities
 ```
@@ -22,7 +20,11 @@ python .\vumsy-cli.py  -j .\config.json --load appvulns -f "C:\Users\ohernandez\
 ## Export
 
 ```
-python .\vumsy-cli.py  -j .\config.json --load appvulns -f "C:\\Users\\ohernandez\\Desktop\\SourceCodeAnalize\\code_issues_coa.csv"
+python .\vumsy-cli.py  -j .\config.json --export vulnerabilities
+```
+
+```
+python .\vumsy-cli.py  -j .\config.json --export hostsvulns
 ```
 
 ## Load
