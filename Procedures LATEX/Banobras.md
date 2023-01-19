@@ -1,4 +1,8 @@
 
+```
+New-Item -ItemType SymbolicLink -Path "Link" -Target "Target"
+```
+
 ## Update
 
 ```
