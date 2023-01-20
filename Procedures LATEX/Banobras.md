@@ -41,7 +41,13 @@ python .\vumsy-cli.py  -j .\config.json --load appvulnsd -f "C:\Users\ohernandez
 
 ```
 
-### Load Vulns Host History
+### Load Vulns Host 
+```
+python .\vumsy-cli.py  -j .\config.json --load hostvulns -f "file.csv" 
+
+```
+
+### Load Vulns Host History WARNING REPLACE!!
 ```
 python .\vumsy-cli.py  -j .\config.json --load hostvulnshist -f "C:\Users\ohernandez\Desktop\DynamicAnalysis\DAV-COAS\Hallazgos-vulnerabilidades-COAS.xlsx" 
 
