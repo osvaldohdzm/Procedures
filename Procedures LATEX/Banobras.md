@@ -6,15 +6,11 @@ New-Item -ItemType SymbolicLink -Path "Link" -Target "Target"
 ## Update
 
 ```
-python .\vumsy-cli.py  -j .\config.json --load appvulns -f "C:\\Users\\ohernandez\\Desktop\\SourceCodeAnalize\\code_issues_coa.csv"
-```
-
-```
 python .\vumsy-cli.py  -j .\config.json --update vulnerabilities
 ```
 
 ```
-python .\vumsy-cli.py  -j .\config.json --load appvulns -f "C:\Users\ohernandez\Desktop\SourceCodeAnalize\code_issues_pcc.csv" --loaddate "11/01/2023"
+python .\vumsy-cli.py  -j .\config.json --update inventory
 ```
 
 ## Export
@@ -43,7 +39,7 @@ python .\vumsy-cli.py  -j .\config.json --load appvulnsd -f "C:\Users\ohernandez
 
 ### Load Vulns Host 
 ```
-python .\vumsy-cli.py  -j .\config.json --load hostvulns -f "file.csv" 
+python .\vumsy-cli.py  -j .\config.json --load hostvulns -f "file.csv"  --loaddate "31/12/2022"
 
 ```
 
