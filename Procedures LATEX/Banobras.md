@@ -27,7 +27,7 @@ python .\vumsy-cli.py  -j .\config.json --export hostsvulns
 
 ### Load Static Code Analysis
 ```
-python .\vumsy-cli.py --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --load banobras_sta_app_vulns -f "C:\Users\ohernandez\Desktop\BANOBRAS\SecData\StaticVulnerabilityAnalysis\SonarQube\2023-01-20-COAS\code_issues_coas.csv" --enddate "20/01/2023"
+python .\vumsy-cli.py --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --load banobras_sta_app_vulns -f "C:\Users\ohernandez\Desktop\BANOBRAS\SecData\StaticVulnerabilityAnalysis\SonarQube\2023-01-20-COAS\code_issues_coas.csv" --startdate "13/01/2023"  --enddate "20/01/2023"
 ```
 
 
