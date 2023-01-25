@@ -40,7 +40,7 @@ python .\vumsy-cli.py --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17
 ### Load Vulns Host  By Private IP
 
 ```
-python .\vumsy-cli.py  --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --load banobras_host_vulns -f "C:\Users\ohernandez\Desktop\BANOBRAS\SecData\HostVulnerabilityAnalysis\2022-11-30 Trimestral\Nessus-Activos-Internos.csv" --iptype public --startdate "27/11/2022" --enddate "30/11/2022"
+python .\vumsy-cli.py  --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --load banobras_host_vulns -f "C:\Users\ohernandez\Desktop\BANOBRAS\DatosSeguridadInformatica\AnalisisVulnerabilidadesEquipos\2022-12-28\Nessus-Activos-Regulatorios.csv" --iptype private --startdate "28/12/2022" --enddate "30/12/2022"
 ```
 
 ### Load Vulns Host  By Public IP
