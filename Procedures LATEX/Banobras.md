@@ -33,7 +33,7 @@ python .\vumsy-cli.py --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17
 
 ### Load Dynamic Code Analysis
 ```
-python .\vumsy-cli.py  -j .\config.json --load appvulnsd -f "C:\Users\ohernandez\Desktop\DynamicAnalysis\DAV-COAS\Hallazgos-vulnerabilidades-COAS.xlsx"  --loaddate "31/12/2022"
+python .\vumsy-cli.py --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns"  --load banobras_dyn_app_vulns -f "C:\Users\ohernandez\Desktop\BANOBRAS\SecData\DynamicVulnerabilityAnalysis\DAV-COAS\Hallazgos-vulnerabilidades-COAS.xlsx"  --startdate "13/01/2023"  --enddate "20/01/2023"
 
 ```
 
