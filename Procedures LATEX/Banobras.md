@@ -10,7 +10,7 @@ python .\vumsy-cli.py --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17
 ```
 
 ```
-python .\vumsy-cli.py --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --update inventory
+python .\vumsy-cli.py --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --update inventory -f "C:\Users\ohernandez\Desktop\BANOBRAS\ConjuntosDatos\Inventario-activos.csv"
 ```
 
 ## Export
@@ -37,10 +37,16 @@ python .\vumsy-cli.py --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17
 
 ```
 
-### Load Vulns Host 
-```
-python .\vumsy-cli.py  -j .\config.json --load hostvulns -f "file.csv"  --loaddate "31/12/2022"
+### Load Vulns Host  By Private IP
 
+```
+python .\vumsy-cli.py  --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --load banobras_host_vulns -f "C:\Users\ohernandez\Desktop\BANOBRAS\SecData\HostVulnerabilityAnalysis\2022-11-30 Trimestral\Nessus-Activos-Internos.csv" --iptype public --startdate "27/11/2022" --enddate "30/11/2022"
+```
+
+### Load Vulns Host  By Public IP
+
+```
+python .\vumsy-cli.py  --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --load banobras_host_vulns -f "C:\Users\ohernandez\Desktop\BANOBRAS\SecData\HostVulnerabilityAnalysis\2022-11-30\Nessus-Activos-Internet.csv" --iptype public --startdate "27/11/2022" --enddate "30/11/2022"
 ```
 
 ### Load Vulns Host History WARNING REPLACE!!
@@ -146,7 +152,7 @@ startSonar
 
 python .\vumsy-cli.py  --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --load banobras_host_vulns -f "C:\Users\ohernandez\Desktop\BANOBRAS\SecData\HostVulnerabilityAnalysis\2022-11-30 Trimestral\Nessus-Activos-Internos.csv" --iptype private --startdate "27/11/2022" --enddate "30/11/2022"
 
-python .\vumsy-cli.py  --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --load banobras_host_vulns -f "C:\Users\ohernandez\Desktop\BANOBRAS\SecData\HostVulnerabilityAnalysis\2022-11-30 Trimestral\Nessus-Activos-Internos.csv" --iptype public --startdate "27/11/2022" --enddate "30/11/2022"
+
 
 
 
