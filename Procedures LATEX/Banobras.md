@@ -6,11 +6,11 @@ New-Item -ItemType SymbolicLink -Path "Link" -Target "Target"
 ## Update
 
 ```
-python .\vumsy-cli.py  -j .\config.json --update vulnerabilities
+python .\vumsy-cli.py --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --update vulnerabilities -f "C:\Users\ohernandez\Desktop\vulnerabilities-dataset.csv"
 ```
 
 ```
-python .\vumsy-cli.py  -j .\config.json --update inventory
+python .\vumsy-cli.py --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --update inventory
 ```
 
 ## Export
