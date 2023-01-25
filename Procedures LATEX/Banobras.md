@@ -16,7 +16,7 @@ python .\vumsy-cli.py  -j .\config.json --update inventory
 ## Export
 
 ```
-python .\vumsy-cli.py  -j .\config.json --export vulnerabilities
+python .\vumsy-cli.py  --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --export vulnerabilities --outputdir "C:\\Users\\ohernandez\\Desktop"
 ```
 
 ```
