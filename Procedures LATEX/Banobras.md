@@ -52,14 +52,14 @@ python .\vumsy-cli.py  -j .\config.json --load hostvulnshist -f "C:\Users\oherna
 
 ### Generate report static vulnerabilities
 ```
-python .\vumsy-cli.py  -j .\config.json --genreport static_av_banobras --startdate "01/12/2022" --enddate "31/12/2022" --gendate "06/01/2023"
+python .\vumsy-cli.py  --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --outputdir "C:\\Users\\ohernandez\\Desktop" --genreport static_av_banobras --startdate "01/12/2022" --enddate "31/12/2022" --gendate "06/01/2023"
 ```
 
 
 ### Generate matrix report for apps vulnerabilities
 
 ```
-python .\vumsy-cli.py  -j .\config.json --genreport banobras_apps_vulns_matrix --startdate "01/12/2022" --enddate "31/12/2022" --gendate "06/01/2023"
+python .\vumsy-cli.py  --dbstring "Trusted_Connection=Yes; Driver={ODBC Driver 17 for SQL Server}; Server=localhost\SQLEXPRESS; Database=ban_vulns" --outputdir "C:\\Users\\ohernandez\\Desktop" --genreport banobras_apps_vulns_matrix --startdate "01/11/2022" --enddate "30/11/2022" --gendate "06/12/2023"
 ```
 
 ### Generate matrix report for hosts vulnerabilities
